@@ -1,0 +1,41 @@
+Catcher: & Time of the game
+Early on, catcher has more control on the ball (Catcher has more control in the game)
+- They are going on with the game plan
+
+Completely predictive on Batter (and his pattern/behaviors)
+
+GAME PLAN is important.
+
+Pitch around KEY BATTERS
+
+Pre-Game analysis: a sheet that calls the strikes
+- Location / Pitch-Ball Type relations (uses the strikes charts)
+
+Season's worth hit-ball info (and up to date)
+
+Approaching a different hitter
+- Hitter reputation? : ABSOLUTELY
+:YES. The languages used
+	- "Show him soft away from out"
+	- "Up in the zone and down for out"
+
+In-out / up-down / back & forward
+
+Batter-Profile-Feature!
+- Buster posey
+
+
+"Pitch to condemn"
+- Not necessarily pitching to the weakness but for a particualar outcome
+
+
+Pitching a very fast ball can have high predictability because they will throw regardless of being predicted becuase it will still be hard to hit
+
+
+High-Predictions: set-up, closurers
+Low-Predictions: situational / Starter / just for lefty
+
+
+Choice of Language for purpose and usefulness of model
+
+*Usefulness on Base-running*

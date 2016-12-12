@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "library(shiny)\n\npitch.dat <- read.csv(\"pitchers2016.csv\")\nnames(pitch.dat)[1] = \"Name\"\n\nshinyUI(pageWithSidebar(\n  headerPanel('ERA & FIP K-means clustering'),\n  sidebarPanel(\n    selectInput('xcol', 'X Variable', \"ERA\"),\n    selectInput('ycol', 'Y Variable', \"FIP\",\n                selected=names(pitch.dat)[[2]]),\n    numericInput('clusters', 'Cluster count', 3,\n                 min = 1, max = 9)\n  ),\n  mainPanel(\n    plotOutput('plot1')\n  )\n))",
+    "created" : 1464037041268.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2155488122",
+    "id" : "77FBBB49",
+    "lastKnownWriteTime" : 1464038083,
+    "last_content_update" : 1464038083249,
+    "path" : "C:/Users/Alex/Google Drive/Research/Sabermetrics/ERA.FIP.clustering/shinyApp/ui.r",
+    "project_path" : "shinyApp/ui.r",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

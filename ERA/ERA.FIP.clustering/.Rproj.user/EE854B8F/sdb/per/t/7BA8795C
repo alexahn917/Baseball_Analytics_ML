@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "dat <- read.csv(\"pitchers2016.csv\")\nnames(dat)[1] = \"Name\"\n\nplayer.list.num <- 153\n\npitch.dat <- dat[1:player.list.num, ]\ndataset <- data.frame(\"Name\"=pitch.dat$Name, \"ERA\"=pitch.dat$ERA, \"FIP\"=pitch.dat$FIP)\ndataset <- dataset[with(dataset, order(Name)),]\n\n#visualization of ERA & FIP data sets\nplot(x=pitch.dat$ERA, y=pitch.dat$FIP, xlab=\"ERA scores\", ylab=\"FIP scores\", main=\"ERA & FIP scores by players\")\n\navg.ERA = mean(pitch.dat$ERA)\navg.FIP = mean(pitch.dat$FIP)\ndata.frame(avg.ERA, avg.FIP)\nabline(v = avg.ERA, col=\"blue\")\nabline(h = avg.FIP, col=\"red\")\n\nhist(pitch.dat$ERA, freq=TRUE, main=\"ERA scores frequency chart\", xlab = \"ERA Scores\", ylab=\"Frequency\", nclass = 10)\nhist(pitch.dat$FIP, freq=TRUE, main=\"FIP scores frequency chart\", xlab = \"FIP Scores\", ylab=\"Frequence\", nclass = 10)\n\nERA.FIP <- data.frame(\"ERA\"=dataset$ERA, \"FIP\"=dataset$FIP)\ndata <- scale(ERA.FIP)\n\n# Determine the number of clusters by NbCluster\nlibrary(NbClust)\nset.seed(1234)\nnc <- NbClust(data, min.nc=2, max.nc=15, method=\"kmeans\")\ncluster.num.table <- table(nc$Best.n[1,]) #5 seems to be an appropriate number of clusters by NbCluster analysis\ncluster.num <- which(as.numeric(cluster.num.table) == max(cluster.num.table))-1\n\n# K-means cluster analysis\nset.seed(1234)\nfit.km <- kmeans(data, cluster.num, nstart=25)\n\nnum.dataset <- dataset\nnum.dataset$Name <- NULL\n\ncluster.centroids <- aggregate(num.dataset, by=list(cluster=fit.km$cluster), mean)\ncluster.counts <- data.frame(\"cluster\"=c(1:cluster.num), \"counts\"=fit.km$size)\npitcher.cluster.table <- table(factor(dataset$Name), fit.km$cluster)\n\nprint(cluster.centroids)\nprint(cluster.counts)\n#print(pitcher.cluster.table)\n\npar(mfrow=c(1,1))\ncluster.means <- data.frame(cluster.centroids$ERA, cluster.centroids$FIP)\nplot(x=pitch.dat$ERA, y=pitch.dat$FIP, xlab=\"ERA scores\", ylab=\"FIP scores\", main=\"ERA & FIP cluster centroids\")\npoints(cluster.means, pch=19, col=\"red\", cex=1.3)\n\n#User interactive functions\nget.pitcher.num <- function(name) {\n  num <- which(dataset$Name == name)\n  return(num)\n}\nget.pitcher.cluster <- function(pitcher.num) {\n  pitcher.cluster.index <- which(as.numeric(pitcher.cluster.table[pitcher.num,])==1)\n  return(pitcher.cluster.index)\n}\n\n#User interface\nget.cluster <- function()\n{ \n  input <- readline(prompt=\"Enter the name(or q to exit):\")\n  if(input == \"q\") {\n    return(\"Good bye!\")\n  }\n  pitcher.num <- get.pitcher.num(input)\n  cluster.num <- get.pitcher.cluster(pitcher.num)\n  cat(input, \"is in cluster\", cluster.num)\n  return(get.cluster())\n}\n\nlibrary(shiny)\nrunApp(\"shinyApp\")\n\n# function that returns player's cluster\nget.cluster()\n",
+    "created" : 1464037037476.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1096209887",
+    "id" : "7BA8795C",
+    "lastKnownWriteTime" : 1464037509,
+    "last_content_update" : 1464037509080,
+    "path" : "C:/Users/Alex/Google Drive/Research/Sabermetrics/ERA.FIP.clustering/ERA.FIP.cluster.R",
+    "project_path" : "ERA.FIP.cluster.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
