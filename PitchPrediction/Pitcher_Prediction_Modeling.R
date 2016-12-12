@@ -6,6 +6,7 @@ library(data.table)
 library(tidyr)
 
 db <- src_sqlite('pitchRx_1.sqlite3')
+target_pitcher <- "Clayton Kershaw"
 
 # Join the location and names table into a new que table.
 pitch <- dbGetQuery(db$con, 'SELECT pitch_type, inning, count, on_1b, on_2b, on_3b, type_confidence,
@@ -17,11 +18,12 @@ pitch <- dbGetQuery(db$con, 'SELECT pitch_type, inning, count, on_1b, on_2b, on_
 #dbListFields(db$con, "player")
 #dbListFields(db$con, "game")
 
-#bso <- dbGetQuery(db$con, 'SELECT b, s, o FROM atbat')
-
 names <- dbGetQuery(db$con, 'SELECT pitcher AS pitcher_id, pitcher_name, batter AS batter_id, 
                     batter_name, score, num, b_height, gameday_link, home_team_runs, away_team_runs, o AS out FROM atbat') #stand?
 
+#n <- as.data.frame(collect(names))
+#n$pitcher_name[n$pitcher_name == "Randal Grichuk"]
+#names[names$pitcher_name == target_pitcher]
 #head(dbGetQuery(db$con, 'SELECT * from game'))
 #head(dbGetQuery(db$con, 'Select * from atbat'))
 
@@ -36,7 +38,7 @@ batter_stats <- dbGetQuery(db$con, 'SELECT id as batter_id, bats as bat_rl FROM 
 #                           avg as batter_avg, 
 #                           )
 
-que <- inner_join(pitch, filter(names, pitcher_name == 'Clayton Kershaw'),
+que <- inner_join(pitch, filter(names, pitcher_name == target_pitcher),
                      by = c('num', 'gameday_link'))
 
 que <- inner_join(que, games, by = c('gameday_link'))
@@ -59,8 +61,8 @@ pitchfx$batter_num <- as.factor(pitchfx$batter_num)
 pitchfx$pitch_type <- as.factor(pitchfx$pitch_type)
 
 # Get # of outs
-pitchfx$o <- pitchfx$o - 1
-pitchfx$o[pitchfx$o == -1] <- 0
+pitchfx$out <- pitchfx$out - 1
+pitchfx$out[pitchfx$out == -1] <- 0
 
 # Select most frequent pitch types
 pitch_labels <- levels(pitchfx$pitch_type)
@@ -82,15 +84,9 @@ pitchfx <- pitchfx[pitchfx$pitch_type == used_pitch_types,]
 pitchfx$score_diff <- (as.numeric(pitchfx$home_team_runs) - as.numeric(pitchfx$away_team_runs)) * pitchfx$pitcher_at_home
 
 
-
 # Cleaning up data df.
-
-#result <- select(data, pitch_type, prev_pitch_type, batter_num, pitch_rl, bat_rl, inning, balls, strikes, on_1b, on_2b, on_3b, score)
 data <- as.data.frame(select(pitchfx, type_confidence, pitch_type, batter_num, pitch_rl, bat_rl, inning,
                              count, out, on_1b, on_2b, on_3b, score_diff))
-#data <- as.data.frame(pitchfx[c(1:7,14, 17, 21:23)])
- 
-# compute score difference
 
 # Only use instances where type confidence is at least 0.90
 data <- data[data$type_confidence > 0.90,]
@@ -114,19 +110,14 @@ data$on_2b <- replace(data$on_2b, data$on_2b != 0, 1)
 data$on_3b <- replace(data$on_3b, is.na(data$on_3b), 0)
 data$on_3b <- replace(data$on_3b, data$on_3b != 0, 1)
 
-
 # retrieve previous pitch ball type
 prev_pitch_type <- lag(data$pitch_type, 1)
 data$prev_pitch_type <- prev_pitch_type
 data[data$balls == 0 & data$strikes == 0, ]$prev_pitch_type <- NA
 
-#result <- select(data, pitch_type, prev_pitch_type, batter_num, pitch_rl, bat_rl, inning, balls, strikes, on_1b, on_2b, on_3b, score)
-
-
 write.csv(data, file="output.csv")
 
-data
-#result
+head(data)
 
 # ----------------FEATURES----------------------
 # Pitch Type: [pitch_type(char)]
@@ -134,29 +125,4 @@ data
 # Player Stats: [batter_num(#), pitch_rl(char), batter_rl(char)]
 # Game: [Innings(#), balls(#), strikes(#), on_1b(#), on_2b(#), on_3b(#), score_differencial(#)]
 
-# Data: [pitch_type, prev_pitch_type, batter_num, pitch_rl, bat_rl, inning, balls, strikes, on_1b, on_2b, on_3b, score]
-
-# Additionals:
-# (1) previous pitch(es)
-# (6) score_differencial(#)
-# *Exclude type_confidence under .90*
-# Change on_b as binary
-# Potentially change to on base *bins*
-# Steal Threat
-
-# Changes:
-# (2) batter_num // to replace qualitative measurement
-# (3) catcher? for later
-# (4) *take out pitcher's batting instances*
-# (5) *take out ERA*
-
-# Picther & Catcher combination?
-
-# Max Schezer
-
-# TODO
-# (1) Sample Datasets
-# (2) Modify SVM for multiclassification
-# (3) Find external libraries for neural network
-# (4) Come up with list of pitchers
-# (5) Catchers?
+# Data: [pitch_type, prev_pitch_type, batter_num, pitch_rl, bat_rl, inning, balls, strikes, on_1b, on_2b, on_3b, score_diff

@@ -1,0 +1,25 @@
+
+# Additionals:
+# (1) previous pitch(es)
+# (6) score_differencial(#)
+# *Exclude type_confidence under .90*
+# Change on_b as binary
+# Potentially change to on base *bins*
+# Steal Threat
+
+# Changes:
+# (2) batter_num // to replace qualitative measurement
+# (3) catcher? for later
+# (4) *take out pitcher's batting instances*
+# (5) *take out ERA*
+
+# Picther & Catcher combination?
+
+# Max Schezer
+
+# TODO
+# (1) Sample Datasets
+# (2) Modify SVM for multiclassification
+# (3) Find external libraries for neural network
+# (4) Come up with list of pitchers
+# (5) Catchers?
