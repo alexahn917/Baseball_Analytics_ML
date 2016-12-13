@@ -5,7 +5,12 @@ library(xtable)
 library(data.table)
 library(tidyr)
 
-db <- src_sqlite('pitchRx_1.sqlite3')
+db <- src_sqlite('pitchRx_test.sqlite3')
+#db_1 <- src_sqlite('pitchRx_1.sqlite3')
+#dbGetQuery(db$con, 'SELECT * from atbat') #WHERE pitcher_name == "Clayton Kershaw"')
+#dbGetQuery(db_1$con, 'SELECT * from atbat WHERE pitcher_name == "Clayton Kershaw"')
+#head(dbGetQuery(db$con, 'Select * from atbat'))
+
 target_pitcher <- "Clayton Kershaw"
 
 # Join the location and names table into a new que table.
@@ -24,8 +29,6 @@ names <- dbGetQuery(db$con, 'SELECT pitcher AS pitcher_id, pitcher_name, batter 
 #n <- as.data.frame(collect(names))
 #n$pitcher_name[n$pitcher_name == "Randal Grichuk"]
 #names[names$pitcher_name == target_pitcher]
-#head(dbGetQuery(db$con, 'SELECT * from game'))
-#head(dbGetQuery(db$con, 'Select * from atbat'))
 
 games <- dbGetQuery(db$con, 'SELECT gameday_link, home_team_id FROM game')
 games$gameday_link <- paste('gid_',games$gameday_link, sep="")

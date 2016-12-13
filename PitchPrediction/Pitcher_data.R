@@ -5,7 +5,7 @@ library('ggplot2')
 library('pitchRx')
 library('RSQLite')
 
-db <- src_sqlite('pitchRx_db.sqlite3')
+db <- src_sqlite('pitchRx_test.sqlite3')
 con = dbConnect(RSQLite::SQLite(), 'pitchRx_Kershaw.sqlite3')
 
 dbListTables(con)
@@ -27,6 +27,3 @@ Clayton_Kershaw16 <- collect(Kershaw_pitch)
 
 #See Summary
 summary(Clayton_Kershaw16)
-
-#Data Frame Objective: 
-#[pitcherID(#), BatterID(#), CatcherID(#), Innings(#), Score(#), Bases(#), count(#-#), previous_pitch(C)]
