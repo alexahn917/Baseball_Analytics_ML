@@ -7,7 +7,7 @@ library(tidyr)
 
 target_pitcher <- "Clayton Kershaw"
 
-db <- src_sqlite('../../DB/pitchRx_Database.sqlite3')
+db <- src_sqlite('../../../../DB/pitchRx_Database.sqlite3')
 
 # Join the location and names table into a new que table.
 pitch <- dbGetQuery(db$con, 'SELECT pitch_type, inning, count, on_1b, on_2b, on_3b, type_confidence,
