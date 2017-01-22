@@ -5,13 +5,9 @@ library(xtable)
 library(data.table)
 library(tidyr)
 
-db <- src_sqlite('pitchRx_test.sqlite3')
-#db_1 <- src_sqlite('pitchRx_1.sqlite3')
-#dbGetQuery(db$con, 'SELECT * from atbat') #WHERE pitcher_name == "Clayton Kershaw"')
-#dbGetQuery(db_1$con, 'SELECT * from atbat WHERE pitcher_name == "Clayton Kershaw"')
-#head(dbGetQuery(db$con, 'Select * from atbat'))
-
 target_pitcher <- "Clayton Kershaw"
+
+db <- src_sqlite('../../DB/pitchRx_Database.sqlite3')
 
 # Join the location and names table into a new que table.
 pitch <- dbGetQuery(db$con, 'SELECT pitch_type, inning, count, on_1b, on_2b, on_3b, type_confidence,
@@ -19,44 +15,38 @@ pitch <- dbGetQuery(db$con, 'SELECT pitch_type, inning, count, on_1b, on_2b, on_
 
 #dbListTables(db$con)
 #dbListFields(db$con, "atbat")
+#head(dbGetQuery(db$con, 'select * from atbat'))
 #dbListFields(db$con, "pitch")
 #dbListFields(db$con, "player")
 #dbListFields(db$con, "game")
 
 names <- dbGetQuery(db$con, 'SELECT pitcher AS pitcher_id, pitcher_name, batter AS batter_id, 
-                    batter_name, score, num, b_height, gameday_link, home_team_runs, away_team_runs, o AS out FROM atbat') #stand?
-
-#n <- as.data.frame(collect(names))
-#n$pitcher_name[n$pitcher_name == "Randal Grichuk"]
-#names[names$pitcher_name == target_pitcher]
+                    batter_name, num, b_height, gameday_link, home_team_runs, away_team_runs, o AS out, p_throws as pitch_rl, stand as bat_rl FROM atbat') #stand?
 
 games <- dbGetQuery(db$con, 'SELECT gameday_link, home_team_id FROM game')
 games$gameday_link <- paste('gid_',games$gameday_link, sep="")
 
-pitcher_stats <- dbGetQuery(db$con, 'SELECT id as pitcher_id, rl AS pitch_rl, team_id as pitcher_team_id FROM player')
-#era AS pitcher_era 
-
-batter_stats <- dbGetQuery(db$con, 'SELECT id as batter_id, bats as bat_rl FROM player')
-#                          rbi AS batter_rbi, 
-#                           avg as batter_avg, 
-#                           )
+pitcher_team_id <- dbGetQuery(db$con, 'SELECT pitcher_team_id FROM player WHERE ')
 
 que <- inner_join(pitch, filter(names, pitcher_name == target_pitcher),
                      by = c('num', 'gameday_link'))
 
 que <- inner_join(que, games, by = c('gameday_link'))
-que <- inner_join(que, pitcher_stats, by = c('pitcher_id'))
-que <- inner_join(que, batter_stats, by = c('batter_id'))
-
 
 pitchfx <- as.data.frame(collect(que))
 pitchfx <- data.table(pitchfx[ do.call(order, pitchfx[ , c('gameday_link','inning', 'num') ] ), ])
 pitchfx[, batter_num:=as.numeric(factor(num)), by=gameday_link]
 pitchfx <- as.data.frame(pitchfx)
 
+# Drop NA pitch_type
+pitchfx <- pitchfx[!is.na(pitchfx$pitch_type),]
+
 # Create pitcher_at_home field
-pitchfx$pitcher_at_home[pitchfx$home_team_id == pitchfx$pitcher_team_id] <- 1
-pitchfx$pitcher_at_home[pitchfx$home_team_id != pitchfx$pitcher_team_id] <- -1
+pitcher_id <- as.numeric(pitchfx$pitcher_id[1])
+sqlStatement <- paste('SELECT team_id as pitcher_team_id FROM player WHERE id = ', pitcher_id, 'LIMIT 1')
+pitcher_team_id <- as.numeric(dbGetQuery(db$con, sqlStatement))
+pitchfx$pitcher_at_home[pitchfx$home_team_id == pitcher_team_id] <- 1
+pitchfx$pitcher_at_home[pitchfx$home_team_id != pitcher_team_id] <- -1
 
 # Create a new field for the batting order number.
 pitchfx$batter_num <- ifelse(pitchfx$batter_num %% 9 == 0, 9, (pitchfx$batter_num %% 9))
