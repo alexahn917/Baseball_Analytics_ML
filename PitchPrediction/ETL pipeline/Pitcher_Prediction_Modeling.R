@@ -108,7 +108,7 @@ prev_pitch_type <- lag(data$pitch_type, 1)
 data$prev_pitch_type <- prev_pitch_type
 data[data$balls == 0 & data$strikes == 0, ]$prev_pitch_type <- NA
 
-write.csv(data, file="output.csv")
+write.csv(data, file=paste(target_pitcher,"output.csv", sep=""))
 
 head(data)
 
