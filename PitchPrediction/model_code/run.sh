@@ -3,8 +3,8 @@
 # a shell script to automate testing. Makes batch testing simpler.
 #
 
-algorithm=(knn mc_perceptron)
-options=(data1)
+algorithm=(knn)
+options=(data1 data2 data3 data4 data5)
 path=(../dataset/Clayton_Kershaw/)
 save_path=(Model/)
 

@@ -66,7 +66,7 @@ def get_args():
     parser.add_argument("--online-learning-rate", type=float, help="The learning rate for perceptron", default=1.0)
     parser.add_argument("--online-training-iterations", type=int, help="The number of training iterations for online methods", default=5)
     parser.add_argument("--pegasos-lambda", type=float, help="The regularization parameter for Pegasos.", default=1e-4)
-    parser.add_argument("--knn", type=int, help="The value of K for KNN classification.", default=5)
+    parser.add_argument("--knn", type=int, help="The value of K for KNN classification.", default=10)
     parser.add_argument("--num-boosting-iterations", type=int, help="The number of boosting iterations to run.", default=10)
     parser.add_argument("--cluster-lambda", type=float, help="The value of lambda in lambda-means.", default=0.0)
     parser.add_argument("--num-clusters", type=int, help="The number of clusters in Naive Bayes clustering.", default=3)
