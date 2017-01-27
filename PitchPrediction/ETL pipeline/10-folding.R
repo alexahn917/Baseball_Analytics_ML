@@ -10,9 +10,9 @@ bifold_partition <- function (k) {
   test = subset(lines, sample == FALSE)
   cat("Sampled train data:", length(train), "\n")
   cat("Sampled test data:", length(test), "\n")
-  train_set_name <- paste("clust_data", k, ".train", sep="")
+  train_set_name <- paste("data", k, ".train", sep="")
   write.table(train, train_set_name, quote = FALSE, col.names = FALSE, row.names = FALSE)
-  test_set_name <- paste("clust_data", k, ".test", sep="")
+  test_set_name <- paste("data", k, ".test", sep="")
   write.table(test, test_set_name, quote = FALSE, col.names = FALSE, row.names = FALSE)
 }
 

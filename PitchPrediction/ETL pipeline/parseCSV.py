@@ -2,8 +2,8 @@ import csv
 
 def readCSV():
 #    data = pd.read_csv('raw_data/Clayton_Kershaw.csv', names=None)
-	csv_file = 'Clayton_Kershaw.csv'
-	txt_file = 'Clayton_Kershaw_txt'
+	csv_file = 'raw_data/Clayton_Kershaw.csv'
+	txt_file = 'clean_data/Clayton_Kershaw'
 
 	file = open(csv_file, "rb")
 	output_file = open(txt_file, "w")
@@ -21,7 +21,7 @@ def readCSV():
 				else:
 					print >> output_file,'%d:%d' %(int(col_num), int(col)),
 				col_num += 1
-			print >> output_file, ""
+			print >> output_file, '\n',
 		row_num +=1
 
 	file.close()

@@ -5,7 +5,7 @@ library('ggplot2')
 library('pitchRx')
 library('sqldf')
 
-db <- src_sqlite("pitchRx_Database.sqlite3", create = TRUE)
+db <- src_sqlite("pitchRx_db.sqlite3", create = TRUE)
 
 #Set up a scrape that will write to the new db
 scrape(start = "2015-01-01", end = "2015-12-31", connect = db$con)
