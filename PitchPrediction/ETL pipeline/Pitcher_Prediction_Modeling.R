@@ -7,26 +7,17 @@ library(tidyr)
 
 target_pitcher <- "Clayton Kershaw"
 
-db <- src_sqlite('../../../../DB/pitchRx_db.sqlite3')
+db <- src_sqlite('../../DB/pitchRx_14_16.sqlite3')
 
 # Join the location and names table into a new que table.
 pitch <- dbGetQuery(db$con, 'SELECT pitch_type, inning, count, on_1b, on_2b, on_3b, type_confidence,
                     num, gameday_link FROM pitch')
-
-#dbListTables(db$con)
-#dbListFields(db$con, "atbat")
-#head(dbGetQuery(db$con, 'select * from atbat'))
-#dbListFields(db$con, "pitch")
-#dbListFields(db$con, "player")
-#dbListFields(db$con, "game")
 
 names <- dbGetQuery(db$con, 'SELECT pitcher AS pitcher_id, pitcher_name, batter AS batter_id, 
                     batter_name, num, b_height, gameday_link, home_team_runs, away_team_runs, o AS out, p_throws as pitch_rl, stand as bat_rl FROM atbat') #stand?
 
 games <- dbGetQuery(db$con, 'SELECT gameday_link, home_team_id FROM game')
 games$gameday_link <- paste('gid_',games$gameday_link, sep="")
-
-pitcher_team_id <- dbGetQuery(db$con, 'SELECT pitcher_team_id FROM player WHERE ')
 
 que <- inner_join(pitch, filter(names, pitcher_name == target_pitcher),
                      by = c('num', 'gameday_link'))
@@ -71,11 +62,11 @@ pitch_type_props <- pitch_type_props[order(-pitch_type_props$value),]
 
 # Drop levels that are not useful (Under proportions of 0.05)
 used_pitch_types <- pitch_type_props$pitch_labels[pitch_type_props$value > 0.05]
-pitchfx <- pitchfx[pitchfx$pitch_type == used_pitch_types,]
+pitchfx <- pitchfx[pitchfx$pitch_type %in% used_pitch_types,]
 
 # compute score difference
 pitchfx$score_diff <- (as.numeric(pitchfx$home_team_runs) - as.numeric(pitchfx$away_team_runs)) * pitchfx$pitcher_at_home
-
+pitchfx <- pitchfx[!is.na(pitchfx$score_diff),]
 
 # Cleaning up data df.
 data <- as.data.frame(select(pitchfx, type_confidence, pitch_type, batter_num, pitch_rl, bat_rl, inning,
@@ -103,12 +94,29 @@ data$on_2b <- replace(data$on_2b, data$on_2b != 0, 1)
 data$on_3b <- replace(data$on_3b, is.na(data$on_3b), 0)
 data$on_3b <- replace(data$on_3b, data$on_3b != 0, 1)
 
+# convert pitch ball types into integer classes
+data$pitch_type <- as.character(data$pitch_type)
+data$pitch_type[data$pitch_type == 'FA'] <- 1
+data$pitch_type[data$pitch_type == 'FF'] <- 2
+data$pitch_type[data$pitch_type == 'FT'] <- 3
+data$pitch_type[data$pitch_type == 'FC'] <- 4
+data$pitch_type[data$pitch_type == 'FS'] <- 5
+data$pitch_type[data$pitch_type == 'SI'] <- 6
+data$pitch_type[data$pitch_type == 'SF'] <- 7
+data$pitch_type[data$pitch_type == 'SL'] <- 8
+data$pitch_type[data$pitch_type == 'CH'] <- 9
+data$pitch_type[data$pitch_type == 'CB'] <- 10
+data$pitch_type[data$pitch_type == 'CU'] <- 11
+data$pitch_type[data$pitch_type == 'KC'] <- 12
+data$pitch_type[data$pitch_type == 'KN'] <- 13
+data$pitch_type[data$pitch_type == 'EP'] <- 14
+
 # retrieve previous pitch ball type
 prev_pitch_type <- lag(data$pitch_type, 1)
 data$prev_pitch_type <- prev_pitch_type
-data[data$balls == 0 & data$strikes == 0, ]$prev_pitch_type <- NA
+data[data$balls == 0 & data$strikes == 0, ]$prev_pitch_type <- -1
 
-write.csv(data, file=paste(target_pitcher,"output.csv", sep=""))
+write.csv(data, file=paste("ETL pipeline/raw_data/",target_pitcher,"_R.csv", sep=""), row.names = FALSE)
 
 head(data)
 
