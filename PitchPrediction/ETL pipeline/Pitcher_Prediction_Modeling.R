@@ -116,6 +116,8 @@ prev_pitch_type <- lag(data$pitch_type, 1)
 data$prev_pitch_type <- prev_pitch_type
 data[data$balls == 0 & data$strikes == 0, ]$prev_pitch_type <- -1
 
+data <- data[sample(nrow(data)),]
+
 write.csv(data, file=paste("ETL pipeline/raw_data/",target_pitcher,"_R.csv", sep=""), row.names = FALSE)
 
 head(data)
