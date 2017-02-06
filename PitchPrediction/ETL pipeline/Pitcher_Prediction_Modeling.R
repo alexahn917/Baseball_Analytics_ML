@@ -5,7 +5,7 @@ library(xtable)
 library(data.table)
 library(tidyr)
 
-target_pitcher <- "Clayton Kershaw"
+target_pitcher <- "Tom Wilhelmsen"
 
 db <- src_sqlite('../../DB/pitchRx_14_16.sqlite3')
 
@@ -96,31 +96,32 @@ data$on_3b <- replace(data$on_3b, data$on_3b != 0, 1)
 
 # convert pitch ball types into integer classes
 data$pitch_type <- as.character(data$pitch_type)
-data$pitch_type[data$pitch_type == 'FA'] <- 1
-data$pitch_type[data$pitch_type == 'FF'] <- 2
-data$pitch_type[data$pitch_type == 'FT'] <- 3
-data$pitch_type[data$pitch_type == 'FC'] <- 4
-data$pitch_type[data$pitch_type == 'FS'] <- 5
-data$pitch_type[data$pitch_type == 'SI'] <- 6
-data$pitch_type[data$pitch_type == 'SF'] <- 7
-data$pitch_type[data$pitch_type == 'SL'] <- 8
-data$pitch_type[data$pitch_type == 'CH'] <- 9
-data$pitch_type[data$pitch_type == 'CB'] <- 10
-data$pitch_type[data$pitch_type == 'CU'] <- 11
-data$pitch_type[data$pitch_type == 'KC'] <- 12
-data$pitch_type[data$pitch_type == 'KN'] <- 13
-data$pitch_type[data$pitch_type == 'EP'] <- 14
+data$pitch_type[data$pitch_type == 'FA'] <- 0
+data$pitch_type[data$pitch_type == 'FF'] <- 1
+data$pitch_type[data$pitch_type == 'FT'] <- 2
+data$pitch_type[data$pitch_type == 'FC'] <- 3
+data$pitch_type[data$pitch_type == 'FS'] <- 4
+data$pitch_type[data$pitch_type == 'SI'] <- 5
+data$pitch_type[data$pitch_type == 'SF'] <- 6
+data$pitch_type[data$pitch_type == 'SL'] <- 7
+data$pitch_type[data$pitch_type == 'CH'] <- 8
+data$pitch_type[data$pitch_type == 'CB'] <- 9
+data$pitch_type[data$pitch_type == 'CU'] <- 10
+data$pitch_type[data$pitch_type == 'KC'] <- 11
+data$pitch_type[data$pitch_type == 'KN'] <- 12
+data$pitch_type[data$pitch_type == 'EP'] <- 13
 
 # retrieve previous pitch ball type
 prev_pitch_type <- lag(data$pitch_type, 1)
 data$prev_pitch_type <- prev_pitch_type
 data[data$balls == 0 & data$strikes == 0, ]$prev_pitch_type <- -1
+data <- data[!is.na(data$prev_pitch_type),]
 
-data <- data[sample(nrow(data)),]
+# data <- data[sample(nrow(data)),]
 
-write.csv(data, file=paste("ETL pipeline/raw_data/",target_pitcher,"_R.csv", sep=""), row.names = FALSE)
+write.csv(data, file=paste("ETL pipeline/raw_data/",target_pitcher,".csv", sep=""), row.names = FALSE)
 
-head(data)
+tail(data)
 
 # ----------------FEATURES----------------------
 # Pitch Type: [pitch_type(char)]
