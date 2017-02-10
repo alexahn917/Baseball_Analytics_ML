@@ -1,0 +1,342 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"batch",
+				"batch_ys"
+			],
+			[
+				"med",
+				"med_x"
+			],
+			[
+				"paddi",
+				"padding-right"
+			],
+			[
+				"right",
+				"padding-right"
+			],
+			[
+				"Cur",
+				"current_price"
+			],
+			[
+				"curr",
+				"curr_day"
+			],
+			[
+				"day",
+				"curr_day"
+			],
+			[
+				"insid",
+				"inside_tradings"
+			],
+			[
+				"currne",
+				"current_price"
+			],
+			[
+				"trd",
+				"trader_name"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "scikit-learn/run.py",
+			"settings":
+			{
+				"buffer_size": 2402,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/Python/Python.sublime-build",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				"Syntax Check"
+			]
+		]
+	],
+	"build_varint": "Syntax Check",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 392.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/ETL pipeline",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/MNIST_data",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/model_code",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/scikit-learn",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/tensorflow"
+	],
+	"file_history":
+	[
+		"/Users/alex/Google Drive/DataStructures/Homework Grading/HW2/Sample_solutions/FlexibleArray.adt",
+		"/Users/alex/Google Drive/DataStructures/Homework Grading/HW2/Sample_solutions/SparseArray.java",
+		"/Users/alex/Google Drive/JHU/2017 Spring/Information Retrieval and Web Agents/foo.prl",
+		"/Users/alex/Google Drive/JHU/2017 Spring/Information Retrieval and Web Agents/foo.pl",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/scikit-learn/run.py",
+		"/Users/alex/Documents/GitHub/Coding_Challenges/bin/Palantir/palantir_interview.java",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/tensorflow/tensorflow.py",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/TS_tutorial.py",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/tensorflow/tensorflow_1.py",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/tensorflow_1.py",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/ETL pipeline/clean_data/Clayton_Kershaw",
+		"/Users/alex/Documents/GitHub/temsorflow_1.py",
+		"/Users/alex/Documents/GitHub/Scikit-learn_Tutorial/tutorial_1.py",
+		"/Users/alex/Google Drive/JHU/2017 Spring/Data Mining/Lecture_2/code.py",
+		"/Users/alex/Documents/GitHub/Coding_Challenges/src/Array/findDuplicateRange.java",
+		"/Users/alex/Documents/GitHub/Coding_Challenges/src/Palantir/SortingLetterByOccurance.java",
+		"/Users/alex/Documents/GitHub/Coding_Challenges/src/Palantir/findDuplicateRange.java",
+		"/Users/alex/Documents/GitHub/Coding_Challenges/src/Palantir/dupInRange.java",
+		"/Users/alex/Documents/GitHub/Coding_Challenges/src/Palantir/CryptAnalysisProblem.java",
+		"/Users/alex/Google Drive/resume_builder.html",
+		"/Users/alex/Documents/GitHub/Scikit-Learn Tutorial/tutorial_1.py",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/ETL pipeline/raw_data/Clayton Kershaw_R.csv",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/dataset/Test/easy.test",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/scikit-learn/parseCSV.py",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/dataset/Test/easy",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/dataset/Clayton_Kershaw/data1.test",
+		"/Users/alex/Documents/GitHub/SocialDating_Matching_and_Clustering/Social Dating/Data/classification_data/data1.test",
+		"/Users/alex/Documents/GitHub/SocialDating_Matching_and_Clustering/Social Dating/Data/cluster_data/clust_data1.test",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/model_code/run.sh",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/ETL pipeline/Transform/Clayton_Kershaw_txt",
+		"/Users/alex/Google Drive/Career/Companies/Originate/code/myQueue.java",
+		"/Users/alex/Documents/GitHub/Coding_Challenges/Python/CatchInsideTrader.py",
+		"/Users/alex/Documents/GitHub/Coding_Challenges/bin/Palantir/rangeSumQuery.java",
+		"/Users/alex/Documents/GitHub/Coding_Challenges/bin/Palantir/containsDuplicate.java",
+		"/Users/alex/Documents/GitHub/Coding_Challenges/bin/Palantir/singleNumber.java",
+		"/Users/alex/Documents/GitHub/Coding_Challenges/bin/Palantir/containsDup3.java",
+		"/Users/alex/Documents/GitHub/Coding_Challenges/bin/Palantir/containsDup3.py",
+		"/Users/alex/Desktop/untitled.py",
+		"/Users/alex/Documents/GitHub/Coding_Challenges/src/Palantir/CatchInsideTrader.java",
+		"/Users/alex/Downloads/material-resume-master/index.html",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/ETL pipeline/Transform/parseCSV.py",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/ETL pipeline/Transform/CSVReader.java",
+		"/Users/alex/Documents/GitHub/Coding_Challenges/Python/findFraudolentTraders.py",
+		"/Users/alex/Google Drive/Career/Companies/MilliporeSigma/screen.txt"
+	],
+	"find":
+	{
+		"height": 31.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"append",
+			"sklearn",
+			"():\n",
+			"100",
+			"numpy",
+			"\t",
+			"#    ",
+			"\n    ",
+			":",
+			"\t",
+			" \n",
+			"//",
+			"(",
+			"na",
+			"mc_percep",
+			"broke",
+			"\t"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "scikit-learn/run.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2402,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								515,
+								515
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 31.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 148.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "pitch_prediction.sublime-project",
+	"replace":
+	{
+		"height": 58.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"run.py",
+				"scikit-learn/run.py"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"~/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/pitch_prediction.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 242.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

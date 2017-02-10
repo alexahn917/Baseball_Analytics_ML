@@ -3,7 +3,7 @@ import tensorflow as tf
 import numpy as np
 
 def readCSV():
-    csv_file = 'ETL pipeline/raw_data/Clayton Kershaw_R.csv'
+    csv_file = '../ETL pipeline/raw_data/Clayton Kershaw.csv'
     file = open(csv_file, "r")
     reader = csv.reader(file)
     instances = []

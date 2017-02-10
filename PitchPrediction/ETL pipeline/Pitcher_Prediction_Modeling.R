@@ -5,7 +5,7 @@ library(xtable)
 library(data.table)
 library(tidyr)
 
-target_pitcher <- "Tom Wilhelmsen"
+target_pitcher <- "David Price"
 
 db <- src_sqlite('../../DB/pitchRx_14_16.sqlite3')
 
@@ -29,9 +29,6 @@ pitchfx <- data.table(pitchfx[ do.call(order, pitchfx[ , c('gameday_link','innin
 pitchfx[, batter_num:=as.numeric(factor(num)), by=gameday_link]
 pitchfx <- as.data.frame(pitchfx)
 
-# Drop NA pitch_type
-pitchfx <- pitchfx[!is.na(pitchfx$pitch_type),]
-
 # Create pitcher_at_home field
 pitcher_id <- as.numeric(pitchfx$pitcher_id[1])
 sqlStatement <- paste('SELECT team_id as pitcher_team_id FROM player WHERE id = ', pitcher_id, 'LIMIT 1')
@@ -48,22 +45,6 @@ pitchfx$pitch_type <- as.factor(pitchfx$pitch_type)
 pitchfx$out <- pitchfx$out - 1
 pitchfx$out[pitchfx$out == -1] <- 0
 
-# Select most frequent pitch types
-pitch_labels <- levels(pitchfx$pitch_type)
-pitch_type_props <- rep(0,length(pitch_labels))
-i=1
-for (PT in pitch_labels) {
-    pitch_type_props[i] = length(pitchfx$pitch_type[pitchfx$pitch_type==PT]) / length(pitchfx$pitch_type)
-    i = i+1;
-}
-pitch_type_props <- melt(data.frame(pitch_labels, pitch_type_props))
-pitch_type_props <- pitch_type_props[order(-pitch_type_props$value),]
-#print(pitch_type_props)
-
-# Drop levels that are not useful (Under proportions of 0.05)
-used_pitch_types <- pitch_type_props$pitch_labels[pitch_type_props$value > 0.05]
-pitchfx <- pitchfx[pitchfx$pitch_type %in% used_pitch_types,]
-
 # compute score difference
 pitchfx$score_diff <- (as.numeric(pitchfx$home_team_runs) - as.numeric(pitchfx$away_team_runs)) * pitchfx$pitcher_at_home
 pitchfx <- pitchfx[!is.na(pitchfx$score_diff),]
@@ -72,9 +53,6 @@ pitchfx <- pitchfx[!is.na(pitchfx$score_diff),]
 data <- as.data.frame(select(pitchfx, type_confidence, pitch_type, batter_num, pitch_rl, bat_rl, inning,
                              count, out, on_1b, on_2b, on_3b, score_diff))
 
-# Only use instances where type confidence is at least 0.90
-data <- data[data$type_confidence > 0.90,]
-data <- data[, !names(data) %in% "type_confidence"]
 #pitcher$uniqueID <- paste(pitcher$num, pitcher$gameday_link, pitcher$inning, sep='')
 
 # convert handedness boolean (0|1)
@@ -110,6 +88,7 @@ data$pitch_type[data$pitch_type == 'CU'] <- 10
 data$pitch_type[data$pitch_type == 'KC'] <- 11
 data$pitch_type[data$pitch_type == 'KN'] <- 12
 data$pitch_type[data$pitch_type == 'EP'] <- 13
+data$pitch_type[data$pitch_type == 'IN'] <- 14
 
 # retrieve previous pitch ball type
 prev_pitch_type <- lag(data$pitch_type, 1)
@@ -117,7 +96,28 @@ data$prev_pitch_type <- prev_pitch_type
 data[data$balls == 0 & data$strikes == 0, ]$prev_pitch_type <- -1
 data <- data[!is.na(data$prev_pitch_type),]
 
-# data <- data[sample(nrow(data)),]
+# Drop NA pitch_type
+data <- data[!is.na(data$pitch_type),]
+
+# Select most frequent pitch types
+pitch_labels <- levels(as.factor(data$pitch_type))
+pitch_type_props <- rep(0,length(pitch_labels))
+i=1
+for (PT in pitch_labels) {
+  pitch_type_props[i] = length(data$pitch_type[data$pitch_type==PT]) / length(data$pitch_type)
+  i = i+1;
+}
+pitch_type_props <- melt(data.frame(pitch_labels, pitch_type_props))
+pitch_type_props <- pitch_type_props[order(-pitch_type_props$value),]
+#print(pitch_type_props)
+
+# Drop levels that are not useful (Under proportions of 0.05)
+used_pitch_types <- pitch_type_props$pitch_labels[pitch_type_props$value > 0.10]
+data <- data[data$pitch_type %in% used_pitch_types,]
+
+# Only use instances where type confidence is at least 0.90
+data <- data[data$type_confidence > 0.90,]
+data <- data[, !names(data) %in% "type_confidence"]
 
 write.csv(data, file=paste("ETL pipeline/raw_data/",target_pitcher,".csv", sep=""), row.names = FALSE)
 

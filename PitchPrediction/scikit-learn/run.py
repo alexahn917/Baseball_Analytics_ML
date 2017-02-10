@@ -8,7 +8,7 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import train_test_split
 
 def readCSV():
-    csv_file = '../ETL pipeline/raw_data/Tom Wilhelmsen.csv'
+    csv_file = '../ETL pipeline/raw_data/Clayton Kershaw.csv'
 
     file = open(csv_file, "r")
     reader = csv.reader(file)
