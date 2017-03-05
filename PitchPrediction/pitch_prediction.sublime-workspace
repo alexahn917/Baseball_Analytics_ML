@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"pit",
+				"pitcher_name"
+			],
+			[
 				"batch",
 				"batch_ys"
 			],
@@ -48,24 +52,20 @@
 	"buffers":
 	[
 		{
-<<<<<<< HEAD
-<<<<<<< HEAD
-			"file": "scikit-learn/run.py",
+			"file": "model_scikit-learn/run.py",
 			"settings":
 			{
-				"buffer_size": 3720,
+				"buffer_size": 3823,
 				"encoding": "UTF-8",
-=======
-=======
->>>>>>> master
-			"file": "/Users/alex/Documents/GitHub/Coding_Challenges/data_science/EMD/data.csv",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "ETL pipeline/Pitcher_Prediction_Modeling.R",
 			"settings":
 			{
-				"buffer_size": 950547,
-<<<<<<< HEAD
->>>>>>> master
-=======
->>>>>>> master
+				"buffer_size": 11080,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		}
@@ -118,43 +118,19 @@
 	},
 	"expanded_folders":
 	[
-<<<<<<< HEAD
-<<<<<<< HEAD
 		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction",
-		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/ETL pipeline",
-=======
-		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/ETL pipeline",
-		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/MNIST_data",
->>>>>>> master
-=======
-		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/ETL pipeline",
-		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/MNIST_data",
->>>>>>> master
-		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/model_code",
-		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/scikit-learn",
-		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/tensorflow"
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/ETL pipeline"
 	],
 	"file_history":
 	[
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/model_scikit-learn/run.py",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/ETL pipeline/Pitcher_Prediction_Modeling.R",
 		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/scikit-learn/run.py",
->>>>>>> master
-=======
-		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/scikit-learn/run.py",
->>>>>>> master
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/model_tensorflow/tensorflow.py",
 		"/Users/alex/Google Drive/DataStructures/Homework Grading/HW2/Sample_solutions/FlexibleArray.adt",
 		"/Users/alex/Google Drive/DataStructures/Homework Grading/HW2/Sample_solutions/SparseArray.java",
 		"/Users/alex/Google Drive/JHU/2017 Spring/Information Retrieval and Web Agents/foo.prl",
 		"/Users/alex/Google Drive/JHU/2017 Spring/Information Retrieval and Web Agents/foo.pl",
-<<<<<<< HEAD
-<<<<<<< HEAD
-		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/scikit-learn/run.py",
-=======
->>>>>>> master
-=======
->>>>>>> master
 		"/Users/alex/Documents/GitHub/Coding_Challenges/bin/Palantir/palantir_interview.java",
 		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/tensorflow/tensorflow.py",
 		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/TS_tutorial.py",
@@ -197,15 +173,7 @@
 	],
 	"find":
 	{
-<<<<<<< HEAD
-<<<<<<< HEAD
 		"height": 37.0
-=======
-		"height": 31.0
->>>>>>> master
-=======
-		"height": 31.0
->>>>>>> master
 	},
 	"find_in_files":
 	{
@@ -219,15 +187,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-<<<<<<< HEAD
-<<<<<<< HEAD
+			"head",
+			"\t",
 			"main",
 			"Y_test",
 			"Y_train",
-=======
->>>>>>> master
-=======
->>>>>>> master
 			"append",
 			"sklearn",
 			"():\n",
@@ -267,69 +231,62 @@
 			[
 				{
 					"buffer": 0,
-<<<<<<< HEAD
-<<<<<<< HEAD
-					"file": "scikit-learn/run.py",
+					"file": "model_scikit-learn/run.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3720,
-=======
-=======
->>>>>>> master
-					"file": "/Users/alex/Documents/GitHub/Coding_Challenges/data_science/EMD/data.csv",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 950547,
-<<<<<<< HEAD
->>>>>>> master
-=======
->>>>>>> master
+						"buffer_size": 3823,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-<<<<<<< HEAD
-<<<<<<< HEAD
-								1864,
-								1864
-=======
-								0,
-								0
->>>>>>> master
-=======
-								0,
-								0
->>>>>>> master
+								786,
+								786
 							]
 						],
 						"settings":
 						{
-<<<<<<< HEAD
-<<<<<<< HEAD
 							"syntax": "Packages/Python/Python.sublime-syntax",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 742.0,
-=======
-=======
->>>>>>> master
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-<<<<<<< HEAD
->>>>>>> master
-=======
->>>>>>> master
+						"translation.y": 936.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "ETL pipeline/Pitcher_Prediction_Modeling.R",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11080,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								450,
+								450
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/R/R.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4633.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -402,15 +359,11 @@
 		[
 			[
 				"",
-<<<<<<< HEAD
-<<<<<<< HEAD
 				"~/Google Drive/JHU/2017 Spring/Information Retrieval and Web Agents/Homework/IR.sublime-project"
-=======
-				"~/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/pitch_prediction.sublime-project"
->>>>>>> master
-=======
-				"~/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/pitch_prediction.sublime-project"
->>>>>>> master
+			],
+			[
+				"ir",
+				"~/Google Drive/JHU/2017 Spring/Information Retrieval and Web Agents/Homework/IR.sublime-project"
 			]
 		],
 		"width": 380.0
@@ -432,7 +385,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 242.0,
+	"side_bar_width": 148.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

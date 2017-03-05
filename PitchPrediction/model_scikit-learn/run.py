@@ -11,11 +11,19 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from scipy.stats import randint as sp_randint
 from sklearn.externals import joblib
+from sklearn.model_selection import cross_val_score
 
 def main():
-    pitcher_name = "Clayton Kershaw"
-    data = readCSV(pitcher_name)
-    train(data, pitcher_name)
+    with open("../pitchers.txt", "r") as f:
+      names = f.read().split('\n')
+      print(names)
+
+#    for pitcher_name in names:
+#      data = readCSV(pitcher_name)
+#      train(data, pitcher_name)
+#      predict(data, pitcher_name)
+    data = readCSV("Jake Arrieta")
+    train(data, "Jake Arrieta")
 
 def readCSV(pitcher_name):
     csv_file = '../ETL pipeline/csv_data/' + pitcher_name + '.csv'
@@ -51,18 +59,15 @@ def train(data, pitcher_name):
     # split into a training and testing set
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
 
-#    classifier = OneVsRestClassifier(LinearSVC(random_state=0))
-#    classifier = OneVsOneClassifier(LinearSVC(random_state=0))
-#    classifier = svm.SVC(decision_function_shape='ovr')
-#    classifier = GridSearchCV(svm.SVC(kernel='rbf', decision_function_shape='ovr'), param_grid)
-#    classifier = MLPClassifier()
+#    clf = OneVsRestClassifier(LinearSVC(random_state=0))
+#    clf = OneVsOneClassifier(LinearSVC(random_state=0))
+#    clf = svm.SVC(decision_function_shape='ovr')
+#    clf = GridSearchCV(svm.SVC(kernel='rbf', decision_function_shape='ovr'), param_grid)
+#    clf = MLPClassifier()
 
     clf = RandomForestClassifier()
-    clf.fit(X_train, y_train)
-    eval(clf, y_test, clf.predict(X_test))
-#    file_name = "../classifiers/" + pitcher_name + ".pkl"
-#    joblib.dump(clf, file_name)
-
+#    clf.fit(X_train, y_train)
+#    eval(clf, y_test, clf.predict(X_test))#
 
     # run grid search
     param_grid = {'n_estimators': [10, 500],
@@ -76,33 +81,36 @@ def train(data, pitcher_name):
 
     grid_search = GridSearchCV(clf, param_grid=param_grid)
     grid_search.fit(X_train, y_train)
-    eval(grid_search.cv_results_, y_test, grid_search.best_estimator_.predict(X_test))
+    eval(grid_search.best_estimator_, y_test, grid_search.best_estimator_.predict(X_test))
+       
     # save the classifier
     file_name = "../classifiers/" + pitcher_name + ".pkl"
     joblib.dump(grid_search.best_estimator_, file_name)
 
-    
-'''
-    # run randomized search
-    param_dist = {'n_estimators': [100, 1000],
-                  "max_depth": [3, None],
-                  "max_features": sp_randint(1, 11),
-                  "min_samples_leaf": sp_randint(1, 11),
-                  "bootstrap": [True, False],
-                  "criterion": ["gini", "entropy"]
-                  }
+def predict(data, pitcher_name):
+    file_name = "../classifiers/" + pitcher_name + ".pkl"
+    clf = joblib.load(file_name)
+    X_train, X_test, y_train, y_test = train_test_split(data[0], data[1], test_size=0.5)
+    predictions = clf.predict(X_test)
+    eval(clf, y_test, predictions)
+    write_results(y_test, predictions, pitcher_name)
 
+def scores(gs, X_train, y_train)
+    scores = cross_val_score(gs, X_train, y_train, scoring='accuracy', cv=2)
+    print('CV accuracy: %.3f +/- %.3f' % (np.mean(scores), np.std(scores)))
 
-    n_iter_search = 20
-    random_search = RandomizedSearchCV(clf, param_distributions=param_dist, n_iter=n_iter_search)
-    random_search.fit(X_train, y_train)
-    eval(random_search.cv_results_, y_test, random_search.best_estimator_.predict(X_test))
-'''
-
-def eval(result, act, pred):
+def eval(clf, act, pred):
     print("Classification report for classifier %s:\n%s\n"
-      % (result, metrics.classification_report(act, pred)))
+      % (clf, metrics.classification_report(act, pred)))
     print("Confusion matrix:\n%s" % metrics.confusion_matrix(act, pred))
-    
+
+
+def write_results(act, pred, pitcher_name):
+    with open("results.txt", "a") as f:
+      f.write(pitcher_name + ":\n")
+      f.write("----------------------------------------------------\n")
+      f.write(metrics.classification_report(act,pred))
+      f.write("\n\n")
+
 if __name__ == "__main__":
     main()
