@@ -5,18 +5,8 @@ library(xtable)
 library(data.table)
 library(tidyr)
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-target_pitcher <- "Clayton Kershaw"
->>>>>>> master
-=======
-target_pitcher <- "Clayton Kershaw"
->>>>>>> master
-
 db <- src_sqlite('~/Documents/Github/DB/pitchRx_14_16.sqlite3')
 
-<<<<<<< HEAD
 # get pitchers list
 pitchers = read.table("../pitchers.txt", 
                sep="\n",
@@ -145,7 +135,7 @@ extract_pitches <- function(target_pitcher)
   
   write.csv(data, file=paste("csv_data/",target_pitcher,".csv", sep=""), row.names = FALSE)
 }
-=======
+
 #dbListFields(db$con, "atbat")
 
 #dbListFields(db$con, "atbat")
@@ -261,9 +251,6 @@ data <- data[, !names(data) %in% "type_confidence"]
 
 write.csv(data, file=paste("ETL pipeline/raw_data/",target_pitcher,".csv", sep=""), row.names = FALSE)
 
-tail(data)
-
->>>>>>> master
 # ----------------FEATURES----------------------
 # Pitch Type: [pitch_type(char)]
 # Previous Pitch: [prev_pitch_type(char)]
