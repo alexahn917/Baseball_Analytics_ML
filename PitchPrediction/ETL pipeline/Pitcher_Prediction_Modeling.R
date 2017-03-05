@@ -6,6 +6,10 @@ library(data.table)
 library(tidyr)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+target_pitcher <- "Clayton Kershaw"
+>>>>>>> master
 =======
 target_pitcher <- "Clayton Kershaw"
 >>>>>>> master
@@ -142,6 +146,8 @@ extract_pitches <- function(target_pitcher)
   write.csv(data, file=paste("csv_data/",target_pitcher,".csv", sep=""), row.names = FALSE)
 }
 =======
+#dbListFields(db$con, "atbat")
+
 #dbListFields(db$con, "atbat")
 
 # Join the location and names table into a new que table.
