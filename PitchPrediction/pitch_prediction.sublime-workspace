@@ -48,10 +48,18 @@
 	"buffers":
 	[
 		{
+<<<<<<< HEAD
 			"file": "/Users/alex/Documents/GitHub/Coding_Challenges/data_science/EMD/data.csv",
 			"settings":
 			{
 				"buffer_size": 950547,
+=======
+			"file": "scikit-learn/run.py",
+			"settings":
+			{
+				"buffer_size": 2402,
+				"encoding": "UTF-8",
+>>>>>>> origin/master
 				"line_ending": "Unix"
 			}
 		}
@@ -76,7 +84,11 @@
 			]
 		]
 	],
+<<<<<<< HEAD
 	"build_varint": "",
+=======
+	"build_varint": "Syntax Check",
+>>>>>>> origin/master
 	"command_palette":
 	{
 		"height": 392.0,
@@ -104,6 +116,10 @@
 	},
 	"expanded_folders":
 	[
+<<<<<<< HEAD
+=======
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction",
+>>>>>>> origin/master
 		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/ETL pipeline",
 		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/MNIST_data",
 		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/model_code",
@@ -112,11 +128,18 @@
 	],
 	"file_history":
 	[
+<<<<<<< HEAD
 		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/scikit-learn/run.py",
+=======
+>>>>>>> origin/master
 		"/Users/alex/Google Drive/DataStructures/Homework Grading/HW2/Sample_solutions/FlexibleArray.adt",
 		"/Users/alex/Google Drive/DataStructures/Homework Grading/HW2/Sample_solutions/SparseArray.java",
 		"/Users/alex/Google Drive/JHU/2017 Spring/Information Retrieval and Web Agents/foo.prl",
 		"/Users/alex/Google Drive/JHU/2017 Spring/Information Retrieval and Web Agents/foo.pl",
+<<<<<<< HEAD
+=======
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/scikit-learn/run.py",
+>>>>>>> origin/master
 		"/Users/alex/Documents/GitHub/Coding_Challenges/bin/Palantir/palantir_interview.java",
 		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/tensorflow/tensorflow.py",
 		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/TS_tutorial.py",
@@ -212,24 +235,43 @@
 			[
 				{
 					"buffer": 0,
+<<<<<<< HEAD
 					"file": "/Users/alex/Documents/GitHub/Coding_Challenges/data_science/EMD/data.csv",
 					"semi_transient": true,
 					"settings":
 					{
 						"buffer_size": 950547,
+=======
+					"file": "scikit-learn/run.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2402,
+>>>>>>> origin/master
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
+<<<<<<< HEAD
 								0,
 								0
+=======
+								515,
+								515
+>>>>>>> origin/master
 							]
 						],
 						"settings":
 						{
+<<<<<<< HEAD
 							"syntax": "Packages/Text/Plain text.tmLanguage"
+=======
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+>>>>>>> origin/master
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,

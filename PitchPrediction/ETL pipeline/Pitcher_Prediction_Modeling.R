@@ -5,7 +5,11 @@ library(xtable)
 library(data.table)
 library(tidyr)
 
+<<<<<<< HEAD
 target_pitcher <- "Clayton Kershaw"
+=======
+target_pitcher <- "David Price"
+>>>>>>> origin/master
 
 db <- src_sqlite('../../DB/pitchRx_14_16.sqlite3')
 
@@ -98,10 +102,17 @@ data$prev_pitch_type <- prev_pitch_type
 data[data$balls == 0 & data$strikes == 0, ]$prev_pitch_type <- -1
 data <- data[!is.na(data$prev_pitch_type),]
 
+<<<<<<< HEAD
 # drop 'NA's under pitch_type
 data <- data[!is.na(data$pitch_type),]
 
 # select only the common/frequent pitch types ( > 10%)
+=======
+# Drop NA pitch_type
+data <- data[!is.na(data$pitch_type),]
+
+# Select most frequent pitch types
+>>>>>>> origin/master
 pitch_labels <- levels(as.factor(data$pitch_type))
 pitch_type_props <- rep(0,length(pitch_labels))
 i=1
@@ -111,12 +122,22 @@ for (PT in pitch_labels) {
 }
 pitch_type_props <- melt(data.frame(pitch_labels, pitch_type_props))
 pitch_type_props <- pitch_type_props[order(-pitch_type_props$value),]
+<<<<<<< HEAD
 
 # drop levels that are not useful (Under proportions of 0.10)
 used_pitch_types <- pitch_type_props$pitch_labels[pitch_type_props$value > 0.10]
 data <- data[data$pitch_type %in% used_pitch_types,]
 
 # only use instances where type confidence is at least 0.90
+=======
+#print(pitch_type_props)
+
+# Drop levels that are not useful (Under proportions of 0.05)
+used_pitch_types <- pitch_type_props$pitch_labels[pitch_type_props$value > 0.10]
+data <- data[data$pitch_type %in% used_pitch_types,]
+
+# Only use instances where type confidence is at least 0.90
+>>>>>>> origin/master
 data <- data[data$type_confidence > 0.90,]
 data <- data[, !names(data) %in% "type_confidence"]
 
