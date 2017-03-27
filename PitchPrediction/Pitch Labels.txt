@@ -1,0 +1,17 @@
+Pitch Labels
+------------
+FA = 0
+FF = 1
+FT = 2
+FC = 3
+FS = 4
+SI = 5
+SF = 6
+SL = 7
+CH = 8
+CB = 9
+CU = 10
+KC = 11
+KN = 12
+EP = 13
+IN = 14

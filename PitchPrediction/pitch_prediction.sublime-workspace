@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"pitch",
+				"pitcher_name"
+			],
+			[
 				"pit",
 				"pitcher_name"
 			],
@@ -55,7 +59,16 @@
 			"file": "model_scikit-learn/run.py",
 			"settings":
 			{
-				"buffer_size": 3823,
+				"buffer_size": 4288,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "model_scikit-learn/results.txt",
+			"settings":
+			{
+				"buffer_size": 3680,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -64,7 +77,7 @@
 			"file": "ETL pipeline/Pitcher_Prediction_Modeling.R",
 			"settings":
 			{
-				"buffer_size": 11080,
+				"buffer_size": 7064,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -119,7 +132,8 @@
 	"expanded_folders":
 	[
 		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction",
-		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/ETL pipeline"
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/ETL pipeline",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/model_scikit-learn"
 	],
 	"file_history":
 	[
@@ -187,6 +201,16 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"on_3b",
+			"on_2b",
+			"on_1b",
+			"csv_data_on_1b",
+			"full_count",
+			"y_train",
+			"X_train",
+			"y_test",
+			"\\xe2",
+			"=",
 			"head",
 			"\t",
 			"main",
@@ -235,25 +259,25 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3823,
+						"buffer_size": 4288,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								786,
-								786
+								612,
+								612
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 2,
+							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 936.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -261,19 +285,49 @@
 				},
 				{
 					"buffer": 1,
-					"file": "ETL pipeline/Pitcher_Prediction_Modeling.R",
+					"file": "model_scikit-learn/results.txt",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 11080,
+						"buffer_size": 3680,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								450,
-								450
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "ETL pipeline/Pitcher_Prediction_Modeling.R",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7064,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
 							]
 						],
 						"settings":
@@ -283,7 +337,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 4633.0,
+						"translation.y": 849.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -359,7 +413,7 @@
 		[
 			[
 				"",
-				"~/Google Drive/JHU/2017 Spring/Information Retrieval and Web Agents/Homework/IR.sublime-project"
+				"~/Google Drive/JHU/2017 Spring/Parallel Programming/Homework/parallel_programming.sublime-project"
 			],
 			[
 				"ir",
@@ -385,7 +439,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 148.0,
+	"side_bar_width": 215.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
