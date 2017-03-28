@@ -44,7 +44,7 @@ def readCSV(pitcher_name, file_type):
                     target.append(int(col))
                     instances.append([])
                 else:
-                    instances[row_num-1].append(int(col))
+                    instances[row_num-1].append(float(col))
                 col_num += 1
         row_num +=1
     file.close()
@@ -59,9 +59,9 @@ def train(data, pitcher_name):
 
 #    clf = OneVsRestClassifier(LinearSVC(random_state=0))
 #    clf = OneVsOneClassifier(LinearSVC(random_state=0))
-#    clf = svm.SVC(decision_function_shape='ovr')
+    clf = svm.SVC(decision_function_shape='ovr', gamma='auto', kernel='rbf')
 #    clf = GridSearchCV(svm.SVC(kernel='rbf', decision_function_shape='ovr'), param_grid)
-    clf = MLPClassifier()
+#    clf = MLPClassifier()
 #    clf = RandomForestClassifier()
 
     clf.fit(X, y)
@@ -119,7 +119,7 @@ def eval(clf, act, pred):
 
 
 def write_results(act, pred, pitcher_name):
-    with open("../classifiers/extended/nn-results.txt", "a") as f:
+    with open("../classifiers/extended/svm-results.txt", "a") as f:
       f.write(pitcher_name + ":\n")
       f.write("----------------------------------------------------\n")
       f.write(metrics.classification_report(act,pred))

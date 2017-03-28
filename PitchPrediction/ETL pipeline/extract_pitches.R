@@ -21,8 +21,8 @@ extract_pitches <- function(target_pitcher, db)
   games <- dbGetQuery(db$con, 'SELECT gameday_link, home_team_id FROM game')
   games$gameday_link <- paste('gid_',games$gameday_link, sep="")
   
-  pitcher_stats <- dbGetQuery(db$con, 'SELECT id AS pitcher_id, era, wins, losses, gameday_link FROM player')
-  batter_stats <- dbGetQuery(db$con, 'SELECT id AS batter_id, bats, rbi, avg, hr, current_position, bat_order, wins, losses, gameday_link FROM player')
+  pitcher_stats <- dbGetQuery(db$con, 'SELECT id AS pitcher_id, era, wins as pitcher_wins, losses as pitcher_losses, gameday_link FROM player')
+  batter_stats <- dbGetQuery(db$con, 'SELECT id AS batter_id, bats, rbi, avg, hr, current_position, bat_order, wins as batter_wins, losses as batter_losses, gameday_link FROM player')
   
   que <- inner_join(pitch, filtered_names, by = c('num', 'gameday_link'))
   
@@ -62,7 +62,7 @@ extract_pitches <- function(target_pitcher, db)
   data <- as.data.frame(select(pitchfx, type_confidence, pitch_type, batter_num, pitch_rl, bat_rl, inning,
                                count, out, on_1b, on_2b, on_3b, score_diff, 
                                era, rbi, avg, hr, batter_num, pitcher_at_home,
-                               wins.x, losses.x, wins.y, losses.y))
+                               pitcher_wins, pitcher_losses, batter_wins, batter_losses))
   
   #pitcher$uniqueID <- paste(pitcher$num, pitcher$gameday_link, pitcher$inning, sep='')
   
@@ -175,5 +175,6 @@ pitchers = read.table("../pitchers.txt",
 # iterate over pitchers
 for (pitcher in pitchers$target_pitcher) 
 {
+  
   extract_pitches(pitcher, db)
 }

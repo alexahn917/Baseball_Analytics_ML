@@ -59,7 +59,7 @@
 			"file": "model_scikit-learn/run.py",
 			"settings":
 			{
-				"buffer_size": 4288,
+				"buffer_size": 4319,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -77,7 +77,7 @@
 			"file": "ETL pipeline/Pitcher_Prediction_Modeling.R",
 			"settings":
 			{
-				"buffer_size": 7064,
+				"buffer_size": 7673,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -259,15 +259,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4288,
+						"buffer_size": 4319,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								612,
-								612
+								1801,
+								1801
 							]
 						],
 						"settings":
@@ -277,7 +277,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 946.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -319,7 +319,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7064,
+						"buffer_size": 7673,
 						"regions":
 						{
 						},
