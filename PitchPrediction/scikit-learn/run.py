@@ -170,14 +170,14 @@ def predict(clf, data, pitcher_name, model_name, save):
 
 def get_param_grid(model):
     if (model == 'nn'):
-      param_grid = {'hidden_layer_sizes': [(10, ), (25, ), (50, ), (75, ), (100, )],
+      param_grid = {'hidden_layer_sizes': [(10, ), (25, ), (50, )],
                     'activation' : ['relu', 'logistic', 'tanh', 'identity'],
                     'solver' : ['lbfgs', 'sgd', 'adam'],
-                    'alpha' : [0.0001, 0.0005, 0.001, 0.005, 0.01, 0.1],
-                    'batch_size' : [200,400,600,800,1000],
+                    'alpha' : [0.001, 0.005, 0.01, 0.1],
+                    'batch_size' : [400,600,800],
                     }
     elif (model == 'rf'):
-      param_grid = {'n_estimators': [10, 500],
+      param_grid = {'n_estimators': [10, 30, 50],
                     'max_features': ['auto', 'sqrt', 'log2'],
                     "max_depth": [3, 5, None],
                     "min_samples_leaf": [1, 3, 5],
