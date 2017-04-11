@@ -20,7 +20,9 @@ def main():
         names = f.read().split('\n')
         print(names)
 
-    model_names = ['svm', 'nn', 'rf']
+    #model_names = ['svm']#, 'nn', 'rf']
+    
+    model_names = ['nn']
     
     clear_txt_files(model_names)
     
@@ -137,7 +139,10 @@ def train(data, pitcher_name, model_name, grid_search):
     if grid_search:
         param_grid = get_param_grid(model_name)
         grid_search = GridSearchCV(clf, param_grid=param_grid)
+        print("\nfitting..")
+        print(param_grid)
         grid_search.fit(X, y)
+        print("\nfitting done!")
         clf = grid_search.best_estimator_
     else:
         clf.fit(X, y)
@@ -146,10 +151,12 @@ def train(data, pitcher_name, model_name, grid_search):
     file_name = "../classifiers/extended/" + pitcher_name + ".pkl"
     joblib.dump(clf, file_name)
 
+
 def load(pitcher_name):
     file_name = "../classifiers/extended/" + pitcher_name + ".pkl"
     clf = joblib.load(file_name)
     return clf
+
 
 def predict(clf, data, pitcher_name, model_name, save):
     X = data[0]
@@ -160,13 +167,14 @@ def predict(clf, data, pitcher_name, model_name, save):
         write_results(y, predictions, pitcher_name, model_name)
     return scores(clf, X, y)
 
+
 def get_param_grid(model):
     if (model == 'nn'):
       param_grid = {'hidden_layer_sizes': [(10, ), (25, ), (50, ), (75, ), (100, )],
                     'activation' : ['relu', 'logistic', 'tanh', 'identity'],
                     'solver' : ['lbfgs', 'sgd', 'adam'],
                     'alpha' : [0.0001, 0.0005, 0.001, 0.005, 0.01, 0.1],
-                    'batch_size' : [200,400,600,800,1000],                    
+                    'batch_size' : [200,400,600,800,1000],
                     }
     elif (model == 'rf'):
       param_grid = {'n_estimators': [10, 500],
@@ -178,10 +186,11 @@ def get_param_grid(model):
                     "n_jobs": [-1]
                     }
     elif (model == 'svm'):
-      param_grid = {'C' : [1e-2, 1e-1, 1, 1e1, 1e2],
-                    'kernel': ['poly', 'rbf', 'sigmoid'],
-                    'degree': [3, 5, 7, 9],
-                    'gamma': [1e-2, 1e-1, 1, 1e1]
+        param_grid = {'C' : [5, 7],
+                    'kernel': ['rbf'], #'poly', 'sigmoid'],
+                    'gamma': [5e-3, 1e-2]#, 1e-1],
+                    #'degree': [3, 5, 7, 9],
+                    #'max_iter' : [100]
                     }
     return param_grid
 
@@ -224,7 +233,8 @@ def write_best_scores(scores, pitcher_name):
         f.write(pitcher_name + ":\n")
         f.write("----------------------------------------------------\n")
         f.write("model: %s\n" % model_name)
-        f.write("score: %f\n" %float(score))
+        f.write(str(clf))
+        f.write("\n score: %f\n" %float(score))
         f.write("\n\n")
         file_name = "../classifiers/best/" + pitcher_name + ".pkl"
         joblib.dump(clf, file_name)
