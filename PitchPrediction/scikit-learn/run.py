@@ -30,7 +30,7 @@ def main():
         test_data = readCSV(pitcher_name, 'test')      
         scores = []
         for model_name in model_names:
-            train(train_data, pitcher_name, model_name, False)
+            train(train_data, pitcher_name, model_name, True)
             clf = load(pitcher_name)
             scores.append((model_name, predict(clf, test_data, pitcher_name, model_name, True), clf))
 

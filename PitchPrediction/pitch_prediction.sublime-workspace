@@ -59,7 +59,7 @@
 			"file": "model_scikit-learn/run.py",
 			"settings":
 			{
-				"buffer_size": 4319,
+				"buffer_size": 5476,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -79,6 +79,14 @@
 			{
 				"buffer_size": 7673,
 				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "ETL pipeline/CSV/extended/Chris Sale_train.csv",
+			"settings":
+			{
+				"buffer_size": 375254,
 				"line_ending": "Unix"
 			}
 		}
@@ -133,7 +141,10 @@
 	[
 		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction",
 		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/ETL pipeline",
-		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/model_scikit-learn"
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/ETL pipeline/CSV",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/ETL pipeline/CSV/extended",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/model_scikit-learn",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/scikit-learn"
 	],
 	"file_history":
 	[
@@ -259,15 +270,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4319,
+						"buffer_size": 5476,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1801,
-								1801
+								1915,
+								1915
 							]
 						],
 						"settings":
@@ -277,7 +288,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 946.0,
+						"translation.y": 394.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -296,8 +307,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								457,
+								457
 							]
 						],
 						"settings":
@@ -310,7 +321,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -326,8 +337,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								7160,
+								7160
 							]
 						],
 						"settings":
@@ -336,8 +347,36 @@
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
+						"translation.x": 6.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "ETL pipeline/CSV/extended/Chris Sale_train.csv",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 375254,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								997,
+								997
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
 						"translation.x": 0.0,
-						"translation.y": 849.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -413,7 +452,7 @@
 		[
 			[
 				"",
-				"~/Google Drive/JHU/2017 Spring/Parallel Programming/Homework/parallel_programming.sublime-project"
+				"~/Google Drive/JHU/2017 Spring/Information Retrieval and Web Agents/Homework/IR.sublime-project"
 			],
 			[
 				"ir",
