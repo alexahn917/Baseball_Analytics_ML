@@ -20,9 +20,8 @@ def main():
         names = f.read().split('\n')
         print(names)
 
-    #model_names = ['svm']#, 'nn', 'rf']
-    
-    model_names = ['nn']
+    model_names = ['svm', 'nn', 'rf']
+    #model_names = ['nn']
     
     clear_txt_files(model_names)
     
