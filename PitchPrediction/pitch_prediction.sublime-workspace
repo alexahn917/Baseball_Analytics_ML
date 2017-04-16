@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"pitcher",
+				"pitcher_name"
+			],
+			[
 				"pitch",
 				"pitcher_name"
 			],
@@ -56,37 +60,52 @@
 	"buffers":
 	[
 		{
-			"file": "model_scikit-learn/run.py",
+			"file": "scikit-learn/run.py",
 			"settings":
 			{
-				"buffer_size": 5476,
+				"buffer_size": 7864,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "model_scikit-learn/results.txt",
+			"file": "ETL pipeline/CSV/extended/Chris Sale_test.csv",
 			"settings":
 			{
-				"buffer_size": 3680,
+				"buffer_size": 125169,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "ETL pipeline/Pitcher_Prediction_Modeling.R",
+			"file": "classifiers/results/best-results.txt",
 			"settings":
 			{
-				"buffer_size": 7673,
-				"encoding": "UTF-8",
+				"buffer_size": 10,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "ETL pipeline/CSV/extended/Chris Sale_train.csv",
+			"file": "classifiers/results/nn-results.txt",
 			"settings":
 			{
-				"buffer_size": 375254,
+				"buffer_size": 10,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "classifiers/results/rf-results.txt",
+			"settings":
+			{
+				"buffer_size": 10,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "classifiers/results/svm-results.txt",
+			"settings":
+			{
+				"buffer_size": 10,
 				"line_ending": "Unix"
 			}
 		}
@@ -114,12 +133,16 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 392.0,
+		"height": 67.0,
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"upper",
+				"Convert Case: Upper Case"
+			]
 		],
-		"width": 392.0
+		"width": 485.0
 	},
 	"console":
 	{
@@ -140,16 +163,25 @@
 	"expanded_folders":
 	[
 		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/classifiers",
 		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/ETL pipeline",
-		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/ETL pipeline/CSV",
-		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/ETL pipeline/CSV/extended",
-		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/model_scikit-learn",
-		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/scikit-learn"
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/ETL pipeline/CSV"
 	],
 	"file_history":
 	[
-		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/model_scikit-learn/run.py",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/classifiers/results/best-results.txt",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/classifiers/results/rf-results.txt",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/classifiers/results/svm-results.txt",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/classifiers/results/nn-results.txt",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/classifiers/extended/nn-results.txt",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/classifiers/extended/rf-results.txt",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/classifiers/extended/svm-results.txt",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/classifiers/extended/best_results.txt",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/classifiers/extended/results.txt",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/ETL pipeline/CSV/extended/Chris Sale_train.csv",
 		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/ETL pipeline/Pitcher_Prediction_Modeling.R",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/model_scikit-learn/results.txt",
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/model_scikit-learn/run.py",
 		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/scikit-learn/run.py",
 		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/model_tensorflow/tensorflow.py",
 		"/Users/alex/Google Drive/DataStructures/Homework Grading/HW2/Sample_solutions/FlexibleArray.adt",
@@ -198,11 +230,11 @@
 	],
 	"find":
 	{
-		"height": 37.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 93.0,
 		"where_history":
 		[
 		]
@@ -212,6 +244,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"extended",
+			"gs",
+			"pitcher_name",
 			"on_3b",
 			"on_2b",
 			"on_1b",
@@ -266,19 +301,19 @@
 			[
 				{
 					"buffer": 0,
-					"file": "model_scikit-learn/run.py",
+					"file": "scikit-learn/run.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5476,
+						"buffer_size": 7864,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1915,
-								1915
+								3583,
+								3583
 							]
 						],
 						"settings":
@@ -288,7 +323,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 394.0,
+						"translation.y": 1654.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -296,19 +331,131 @@
 				},
 				{
 					"buffer": 1,
-					"file": "model_scikit-learn/results.txt",
+					"file": "ETL pipeline/CSV/extended/Chris Sale_test.csv",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3680,
+						"buffer_size": 125169,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								457,
-								457
+								485,
+								485
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "classifiers/results/best-results.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10,
+								10
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "classifiers/results/nn-results.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "classifiers/results/rf-results.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "classifiers/results/svm-results.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10,
+								10
 							]
 						],
 						"settings":
@@ -321,65 +468,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "ETL pipeline/Pitcher_Prediction_Modeling.R",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 7673,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								7160,
-								7160
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/R/R.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 6.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "ETL pipeline/CSV/extended/Chris Sale_train.csv",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 375254,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								997,
-								997
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
+					"stack_index": 4,
 					"type": "text"
 				}
 			]
@@ -452,7 +541,7 @@
 		[
 			[
 				"",
-				"~/Google Drive/JHU/2017 Spring/Information Retrieval and Web Agents/Homework/IR.sublime-project"
+				"~/Documents/GitHub/Coding_Challenges/data_science/EMD/EMD.sublime-workspace"
 			],
 			[
 				"ir",

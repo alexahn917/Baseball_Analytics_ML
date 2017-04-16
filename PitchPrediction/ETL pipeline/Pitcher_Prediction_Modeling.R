@@ -84,7 +84,7 @@ extract_pitches <- function(target_pitcher, db)
   data$on_3b <- replace(data$on_3b, data$on_3b != 0, 1)
   
   # convert pitch ball types into integer classes
-  data$pitch_type <- as.character(data$pitch_type)
+  #data$pitch_type <- as.character(data$pitch_type)
   data$pitch_type[data$pitch_type == 'FA'] <- 0
   data$pitch_type[data$pitch_type == 'FF'] <- 1
   data$pitch_type[data$pitch_type == 'FT'] <- 2
@@ -105,13 +105,13 @@ extract_pitches <- function(target_pitcher, db)
   # retrieve previous pitch ball type
   prev_pitch_type <- lag(data$pitch_type, 1)
   data$prev_pitch_type <- prev_pitch_type
-  data[data$balls == 0 & data$strikes == 0, ]$prev_pitch_type <- -1
+  data[data$balls == 0 & data$strikes == 0, ]$prev_pitch_type <- NA
   data <- data[!is.na(data$prev_pitch_type),]
   
   # retrieve 2 previous pitch ball type
   prevprev_pitch_type <- lag(data$prev_pitch_type, 1)
   data$prevprev_pitch_type <- prevprev_pitch_type
-  data[(data$balls == 0 & data$strikes == 0) | (data$balls == 1 & data$strikes == 0) | (data$balls == 0 & data$strikes == 1), ]$prevprev_pitch_type <- -1
+  data[(data$balls == 0 & data$strikes == 0) | (data$balls == 1 & data$strikes == 0) | (data$balls == 0 & data$strikes == 1), ]$prevprev_pitch_type <- NA
   data <- data[!is.na(data$prevprev_pitch_type),]
     
   # Drop NA pitch_type

@@ -101,17 +101,17 @@ extract_pitches <- function(target_pitcher, db)
   data$pitch_type[data$pitch_type == 'EP'] <- 13
   data$pitch_type[data$pitch_type == 'IN'] <- 14
   data$pitch_type[data$pitch_type == 'PO'] <- 15
-    
+
   # retrieve previous pitch ball type
   prev_pitch_type <- lag(data$pitch_type, 1)
   data$prev_pitch_type <- prev_pitch_type
-  data[data$balls == 0 & data$strikes == 0, ]$prev_pitch_type <- -1
+  data[data$balls == 0 & data$strikes == 0, ]$prev_pitch_type <- NA
   data <- data[!is.na(data$prev_pitch_type),]
   
   # retrieve 2 previous pitch ball type
   prevprev_pitch_type <- lag(data$prev_pitch_type, 1)
   data$prevprev_pitch_type <- prevprev_pitch_type
-  data[(data$balls == 0 & data$strikes == 0) | (data$balls == 1 & data$strikes == 0) | (data$balls == 0 & data$strikes == 1), ]$prevprev_pitch_type <- -1
+  data[(data$balls == 0 & data$strikes == 0) | (data$balls == 1 & data$strikes == 0) | (data$balls == 0 & data$strikes == 1), ]$prevprev_pitch_type <- NA
   data <- data[!is.na(data$prevprev_pitch_type),]
     
   # Drop NA pitch_type
@@ -143,14 +143,16 @@ extract_pitches <- function(target_pitcher, db)
   # extract specific domain
   #data <- data[data$on_3b==1, ]
 
+  #write.csv(data, file=paste("ETL pipeline/CSV/full/",target_pitcher,".csv", sep=""), row.names = FALSE)
+  
   randomized_data <- data[sample(nrow(data)),]
   data_len <- length(randomized_data$pitch_type)
   split_size <- ceiling((3/4)*data_len)
   train_data <- randomized_data[1:split_size, ]
   test_data <- randomized_data[(split_size+1):data_len, ]
 
-  write.csv(train_data, file=paste("CSV/extended/",target_pitcher,"_train.csv", sep=""), row.names = FALSE)
-  write.csv(test_data, file=paste("CSV/extended/",target_pitcher,"_test.csv", sep=""), row.names = FALSE)
+  write.csv(train_data, file=paste("ETL pipeline/CSV/extended/",target_pitcher,"_train.csv", sep=""), row.names = FALSE)
+  write.csv(test_data, file=paste("ETL pipeline/CSV/extended/",target_pitcher,"_test.csv", sep=""), row.names = FALSE)
 }
 
 # ----------------FEATURES----------------------
@@ -166,7 +168,7 @@ extract_pitches <- function(target_pitcher, db)
 
 db <- src_sqlite('~/Documents/Github/DB/pitchRx_14_16.sqlite3')
 
-pitchers = read.table("../pitchers.txt", 
+pitchers = read.table("pitchers.txt", 
                       sep="\n",
                       fill=FALSE,
                       col.names= "target_pitcher",

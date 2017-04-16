@@ -2,6 +2,7 @@
 import csv
 import pickle
 import numpy as np
+import pandas as pd
 from sklearn import datasets, svm, metrics
 from sklearn.svm import LinearSVC
 from sklearn.multiclass import OneVsRestClassifier
@@ -14,24 +15,29 @@ from sklearn.ensemble import RandomForestClassifier
 from scipy.stats import randint as sp_randint
 from sklearn.externals import joblib
 from sklearn.model_selection import cross_val_score
+from sklearn.feature_extraction import DictVectorizer as DV
 
 def main():
     with open("../pitchers.txt", "r") as f:
         names = f.read().split('\n')
-        print(names)
+        #print(names)
 
-    model_names = ['svm', 'nn', 'rf']
+    #model_names = ['svm', 'nn', 'rf']
     #model_names = ['nn']
+    #model_names = ['svm']
+    model_names = ['rf']
     
     clear_txt_files(model_names)
     
     # Train, Test, Write Results
     for pitcher_name in names:
-        train_data = readCSV(pitcher_name, 'train')
-        test_data = readCSV(pitcher_name, 'test')      
+        test_data, train_data = readCSV(pitcher_name)
+        
+        #test_data, train_data = readFullCSV(pitcher_name)
+        
         scores = []
         for model_name in model_names:
-            train(train_data, pitcher_name, model_name, True)
+            train(train_data, pitcher_name, model_name, grid_search=False)
             clf = load(pitcher_name)
             scores.append((model_name, predict(clf, test_data, pitcher_name, model_name, True), clf))
 
@@ -94,31 +100,47 @@ def predict_atbat(clf):
     print(clf.predict(X))
 
 
-def readCSV(pitcher_name, file_type):
-    csv_file = '../ETL pipeline/CSV/extended/' + pitcher_name + '_' + file_type +'.csv'
-    file = open(csv_file, "r")
-    reader = csv.reader(file)
-    instances = []
-    target = []
-    row_num = 0 
-    for row in reader:
-        if row_num is 0:
-            header = row
-        else:
-            col_num = 0
-            features = []
-            for col in row:
-                if col_num is 0:
-                    target.append(int(col))
-                    instances.append([])
-                else:
-                    instances[row_num-1].append(float(col))
-                col_num += 1
-        row_num +=1
-    file.close()
-    data = [instances, target]
-    return data
+def readCSV(pitcher_name):
+    train_csv_file = '../ETL pipeline/CSV/extended/' + pitcher_name + '_train' + '.csv'
+    test_csv_file = '../ETL pipeline/CSV/extended/' + pitcher_name + '_test' + '.csv'
 
+    X_train = pd.DataFrame.from_csv(train_csv_file, index_col=None)
+    y_train = X_train['pitch_type']
+    X_train.drop('pitch_type', axis = 1, inplace=True)
+
+
+    X_test = pd.DataFrame.from_csv(test_csv_file, index_col=None)
+    y_test = X_test['pitch_type']
+    X_test.drop('pitch_type', axis = 1, inplace=True)
+
+
+    #string_cols = ['prev_pitch_type', 'prevprev_pitch_type']
+    #dict_vect = DV(sparse = False)
+    #instances_num = instances.drop(string_cols, axis = 1)
+    #instances_str = instances[string_cols].to_dict(orient = 'records')
+    #instances_str_vectorized = dict_vect.fit_transform(instances_str)
+    #instances_vec = np.hstack((instances_num, instances_str_vectorized))
+    
+    return [X_train, y_train], [X_test, y_test]
+
+
+def readFullCSV(pitcher_name):
+    csv_file = '../ETL pipeline/CSV/full/' + pitcher_name +'.csv'
+    instances = pd.DataFrame.from_csv(csv_file, index_col=None)
+    N = len(instances)
+    targets = instances['pitch_type']
+    instances.drop('pitch_type', axis = 1, inplace=True)
+    string_cols = ['prev_pitch_type', 'prevprev_pitch_type']
+    dict_vect = DV(sparse = False)
+    instances_num = instances.drop(string_cols, axis = 1)
+    instances_str = instances[string_cols].to_dict(orient = 'records')
+    instances_str_vectorized = dict_vect.fit_transform(instances_str)
+    instances_vec = np.hstack((instances_num, instances_str_vectorized))
+    #data = [instances_vec, targets]
+    
+    X_train, X_test, y_train, y_test = train_test_split(instances_vec, targets, test_size=0.33, random_state=42)
+
+    return [X_train, y_train], [X_test, y_test]
 
 def train(data, pitcher_name, model_name, grid_search):
     X = data[0]
@@ -137,7 +159,7 @@ def train(data, pitcher_name, model_name, grid_search):
     # grid search
     if grid_search:
         param_grid = get_param_grid(model_name)
-        grid_search = GridSearchCV(clf, param_grid=param_grid)
+        grid_search = GridSearchCV(clf, param_grid=param_grid, n_jobs=-1, scoring='adjusted_rand_score')
         print("\nfitting..")
         print(param_grid)
         grid_search.fit(X, y)
@@ -176,13 +198,13 @@ def get_param_grid(model):
                     'batch_size' : [400,600,800],
                     }
     elif (model == 'rf'):
-      param_grid = {'n_estimators': [10, 30, 50],
-                    'max_features': ['auto', 'sqrt', 'log2'],
-                    "max_depth": [3, 5, None],
-                    "min_samples_leaf": [1, 3, 5],
-                    "bootstrap": [True, False],
-                    "criterion": ["gini", "entropy"],
-                    "n_jobs": [-1]
+      param_grid = {'n_estimators': [30, 50, 100],
+                    #'n_estimators': [10, 30, 50],
+                    #'max_features': ['auto', 'sqrt', 'log2'],
+                    "max_depth": [3, 5, 10],
+                    #"min_samples_leaf": [1, 3, 5],
+                    #"bootstrap": [True, False],
+                    #"criterion": ["gini", "entropy"],
                     }
     elif (model == 'svm'):
         param_grid = {'C' : [5, 7],
