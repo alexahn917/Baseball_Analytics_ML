@@ -85,22 +85,22 @@ extract_pitches <- function(target_pitcher, db)
   
   # convert pitch ball types into integer classes
   data$pitch_type <- as.character(data$pitch_type)
-  data$pitch_type[data$pitch_type == 'FA'] <- 0
-  data$pitch_type[data$pitch_type == 'FF'] <- 1
-  data$pitch_type[data$pitch_type == 'FT'] <- 2
-  data$pitch_type[data$pitch_type == 'FC'] <- 3
-  data$pitch_type[data$pitch_type == 'FS'] <- 4
-  data$pitch_type[data$pitch_type == 'SI'] <- 5
-  data$pitch_type[data$pitch_type == 'SF'] <- 6
-  data$pitch_type[data$pitch_type == 'SL'] <- 7
-  data$pitch_type[data$pitch_type == 'CH'] <- 8
-  data$pitch_type[data$pitch_type == 'CB'] <- 9
-  data$pitch_type[data$pitch_type == 'CU'] <- 10
-  data$pitch_type[data$pitch_type == 'KC'] <- 11
-  data$pitch_type[data$pitch_type == 'KN'] <- 12
-  data$pitch_type[data$pitch_type == 'EP'] <- 13
-  data$pitch_type[data$pitch_type == 'IN'] <- 14
-  data$pitch_type[data$pitch_type == 'PO'] <- 15
+  #data$pitch_type[data$pitch_type == 'FA'] <- 1
+  #data$pitch_type[data$pitch_type == 'FF'] <- 2
+  #data$pitch_type[data$pitch_type == 'FT'] <- 3
+  #data$pitch_type[data$pitch_type == 'FC'] <- 4
+  #data$pitch_type[data$pitch_type == 'FS'] <- 5
+  #data$pitch_type[data$pitch_type == 'SI'] <- 6
+  #data$pitch_type[data$pitch_type == 'SF'] <- 7
+  #data$pitch_type[data$pitch_type == 'SL'] <- 8
+  #data$pitch_type[data$pitch_type == 'CH'] <- 9
+  #data$pitch_type[data$pitch_type == 'CB'] <- 10
+  #data$pitch_type[data$pitch_type == 'CU'] <- 11
+  #data$pitch_type[data$pitch_type == 'KC'] <- 12
+  #data$pitch_type[data$pitch_type == 'KN'] <- 13
+  #data$pitch_type[data$pitch_type == 'EP'] <- 14
+  #data$pitch_type[data$pitch_type == 'IN'] <- 15
+  #data$pitch_type[data$pitch_type == 'PO'] <- 16
 
   # retrieve previous pitch ball type
   prev_pitch_type <- lag(data$pitch_type, 1)
@@ -113,10 +113,10 @@ extract_pitches <- function(target_pitcher, db)
   data$prevprev_pitch_type <- prevprev_pitch_type
   data[(data$balls == 0 & data$strikes == 0) | (data$balls == 1 & data$strikes == 0) | (data$balls == 0 & data$strikes == 1), ]$prevprev_pitch_type <- NA
   data <- data[!is.na(data$prevprev_pitch_type),]
-    
+  
   # Drop NA pitch_type
   data <- data[!is.na(data$pitch_type),]
-  
+
   # Select most frequent pitch types
   pitch_labels <- levels(as.factor(data$pitch_type))
   pitch_type_props <- rep(0,length(pitch_labels))
@@ -140,6 +140,11 @@ extract_pitches <- function(target_pitcher, db)
   # convert NAs
   data <- replace(data, is.na(data), 0)
   
+  # one hot encoding for pitch types
+  data <- with(data, data.frame(pitch_type, batter_num, pitch_rl, bat_rl, inning, balls, strikes, 
+    out, on_1b, on_2b, on_3b, score_diff, era, rbi, avg, hr, pitcher_at_home, pitcher_wins, pitcher_losses, 
+    batter_wins, batter_losses, model.matrix(~prev_pitch_type-1,data), model.matrix(~prevprev_pitch_type-1,data)))
+
   # extract specific domain
   #data <- data[data$on_3b==1, ]
 
@@ -151,8 +156,8 @@ extract_pitches <- function(target_pitcher, db)
   train_data <- randomized_data[1:split_size, ]
   test_data <- randomized_data[(split_size+1):data_len, ]
 
-  write.csv(train_data, file=paste("ETL pipeline/CSV/extended/",target_pitcher,"_train.csv", sep=""), row.names = FALSE)
-  write.csv(test_data, file=paste("ETL pipeline/CSV/extended/",target_pitcher,"_test.csv", sep=""), row.names = FALSE)
+  write.csv(train_data, file=paste("ETL pipeline/CSV/raw/",target_pitcher,"_train.csv", sep=""), row.names = FALSE)
+  write.csv(test_data, file=paste("ETL pipeline/CSV/raw/",target_pitcher,"_test.csv", sep=""), row.names = FALSE)
 }
 
 # ----------------FEATURES----------------------

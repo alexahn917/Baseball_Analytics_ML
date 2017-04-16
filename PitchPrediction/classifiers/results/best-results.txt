@@ -9,7 +9,7 @@ RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
             min_samples_split=2, min_weight_fraction_leaf=0.0,
             n_estimators=10, n_jobs=1, oob_score=False, random_state=None,
             verbose=0, warm_start=False)
- score: 0.478687
+ score: 0.467539
 
 
 David Price:
@@ -21,7 +21,7 @@ RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
             min_samples_split=2, min_weight_fraction_leaf=0.0,
             n_estimators=10, n_jobs=1, oob_score=False, random_state=None,
             verbose=0, warm_start=False)
- score: 0.401901
+ score: 0.394403
 
 
 Jake Arrieta:
@@ -33,7 +33,7 @@ RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
             min_samples_split=2, min_weight_fraction_leaf=0.0,
             n_estimators=10, n_jobs=1, oob_score=False, random_state=None,
             verbose=0, warm_start=False)
- score: 0.432609
+ score: 0.424642
 
 
 Zack Greinke:
@@ -45,7 +45,7 @@ RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
             min_samples_split=2, min_weight_fraction_leaf=0.0,
             n_estimators=10, n_jobs=1, oob_score=False, random_state=None,
             verbose=0, warm_start=False)
- score: 0.405521
+ score: 0.405513
 
 
 Max Scherzer:
@@ -57,7 +57,7 @@ RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
             min_samples_split=2, min_weight_fraction_leaf=0.0,
             n_estimators=10, n_jobs=1, oob_score=False, random_state=None,
             verbose=0, warm_start=False)
- score: 0.533068
+ score: 0.532416
 
 
 Chris Sale:
@@ -69,7 +69,7 @@ RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
             min_samples_split=2, min_weight_fraction_leaf=0.0,
             n_estimators=10, n_jobs=1, oob_score=False, random_state=None,
             verbose=0, warm_start=False)
- score: 0.446788
+ score: 0.435698
 
 
 Dallas Keuchel:
@@ -81,7 +81,7 @@ RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
             min_samples_split=2, min_weight_fraction_leaf=0.0,
             n_estimators=10, n_jobs=1, oob_score=False, random_state=None,
             verbose=0, warm_start=False)
- score: 0.522630
+ score: 0.516053
 
 
 Felix Hernandez:
@@ -93,7 +93,7 @@ RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
             min_samples_split=2, min_weight_fraction_leaf=0.0,
             n_estimators=10, n_jobs=1, oob_score=False, random_state=None,
             verbose=0, warm_start=False)
- score: 0.382365
+ score: 0.376662
 
 
 Madison Bumgarner:
@@ -105,7 +105,7 @@ RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
             min_samples_split=2, min_weight_fraction_leaf=0.0,
             n_estimators=10, n_jobs=1, oob_score=False, random_state=None,
             verbose=0, warm_start=False)
- score: 0.386169
+ score: 0.368489
 
 
 Jose Fernandez:
@@ -117,6 +117,6 @@ RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
             min_samples_split=2, min_weight_fraction_leaf=0.0,
             n_estimators=10, n_jobs=1, oob_score=False, random_state=None,
             verbose=0, warm_start=False)
- score: 0.573432
+ score: 0.550515
 
 

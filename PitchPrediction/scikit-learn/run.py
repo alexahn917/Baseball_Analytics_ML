@@ -101,8 +101,8 @@ def predict_atbat(clf):
 
 
 def readCSV(pitcher_name):
-    train_csv_file = '../ETL pipeline/CSV/extended/' + pitcher_name + '_train' + '.csv'
-    test_csv_file = '../ETL pipeline/CSV/extended/' + pitcher_name + '_test' + '.csv'
+    train_csv_file = '../ETL pipeline/CSV/raw/' + pitcher_name + '_train' + '.csv'
+    test_csv_file = '../ETL pipeline/CSV/raw/' + pitcher_name + '_test' + '.csv'
 
     X_train = pd.DataFrame.from_csv(train_csv_file, index_col=None)
     y_train = X_train['pitch_type']
