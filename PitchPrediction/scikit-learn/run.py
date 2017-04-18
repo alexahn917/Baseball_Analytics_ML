@@ -22,10 +22,10 @@ def main():
         names = f.read().split('\n')
         #print(names)
 
-    #model_names = ['svm', 'nn', 'rf']
+    model_names = ['svm', 'nn', 'rf']
     #model_names = ['nn']
     #model_names = ['svm']
-    model_names = ['rf']
+    #model_names = ['rf']
     
     clear_txt_files(model_names)
     
@@ -159,7 +159,7 @@ def train(data, pitcher_name, model_name, grid_search):
     # grid search
     if grid_search:
         param_grid = get_param_grid(model_name)
-        grid_search = GridSearchCV(clf, param_grid=param_grid, n_jobs=-1, scoring='adjusted_rand_score')
+        grid_search = GridSearchCV(clf, param_grid=param_grid, n_jobs=-1)
         print("\nfitting..")
         print(param_grid)
         grid_search.fit(X, y)
@@ -195,23 +195,23 @@ def get_param_grid(model):
                     'activation' : ['relu', 'logistic', 'tanh', 'identity'],
                     'solver' : ['lbfgs', 'sgd', 'adam'],
                     'alpha' : [0.001, 0.005, 0.01, 0.1],
-                    'batch_size' : [400,600,800],
+                    #'batch_size' : [400,600,800],
                     }
     elif (model == 'rf'):
-      param_grid = {'n_estimators': [30, 50, 100],
+      param_grid = {'n_estimators': [30, 50, 70],
                     #'n_estimators': [10, 30, 50],
                     #'max_features': ['auto', 'sqrt', 'log2'],
-                    "max_depth": [3, 5, 10],
+                    "max_depth": [3, 5, 7],
                     #"min_samples_leaf": [1, 3, 5],
-                    #"bootstrap": [True, False],
-                    #"criterion": ["gini", "entropy"],
+                    "bootstrap": [True, False],
+                    "criterion": ["gini", "entropy"],
                     }
     elif (model == 'svm'):
-        param_grid = {'C' : [5, 7],
-                    'kernel': ['rbf'], #'poly', 'sigmoid'],
-                    'gamma': [5e-3, 1e-2]#, 1e-1],
+        param_grid = {'C' : [5, 7, 9, 12],
+                    'kernel': ['rbf'], #'poly'],#, 'sigmoid'],
+                    'gamma': [5e-3, 1e-2, 1e-1],
+                    #'max_iter' : [100, 200, 300]
                     #'degree': [3, 5, 7, 9],
-                    #'max_iter' : [100]
                     }
     return param_grid
 
