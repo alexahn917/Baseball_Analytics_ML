@@ -22,8 +22,8 @@ def main():
         names = f.read().split('\n')
         #print(names)
 
-    model_names = ['svm', 'nn', 'rf']
-    #model_names = ['nn']
+    #model_names = ['svm', 'nn', 'rf']
+    model_names = ['nn']
     #model_names = ['svm']
     #model_names = ['rf']
     
@@ -37,7 +37,7 @@ def main():
         
         scores = []
         for model_name in model_names:
-            train(train_data, pitcher_name, model_name, grid_search=False)
+            train(train_data, pitcher_name, model_name, grid_search=True)
             clf = load(pitcher_name)
             scores.append((model_name, predict(clf, test_data, pitcher_name, model_name, True), clf))
 
@@ -159,7 +159,7 @@ def train(data, pitcher_name, model_name, grid_search):
     # grid search
     if grid_search:
         param_grid = get_param_grid(model_name)
-        grid_search = GridSearchCV(clf, param_grid=param_grid, n_jobs=-1)
+        grid_search = GridSearchCV(clf, param_grid=param_grid, n_jobs=-1, scoring='f1_macro')
         print("\nfitting..")
         print(param_grid)
         grid_search.fit(X, y)
@@ -191,9 +191,9 @@ def predict(clf, data, pitcher_name, model_name, save):
 
 def get_param_grid(model):
     if (model == 'nn'):
-      param_grid = {'hidden_layer_sizes': [(10, ), (25, ), (50, )],
-                    'activation' : ['relu', 'logistic', 'tanh', 'identity'],
-                    'solver' : ['lbfgs', 'sgd', 'adam'],
+      param_grid = {'hidden_layer_sizes': [(100, ), (300, ), (500, )],
+                    'activation' : ['relu', 'logistic'],#, 'tanh', 'identity'],
+                    'solver' : ['sgd', 'adam', 'lbfgs'], 
                     'alpha' : [0.001, 0.005, 0.01, 0.1],
                     #'batch_size' : [400,600,800],
                     }

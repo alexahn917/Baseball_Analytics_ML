@@ -3,7 +3,7 @@ library(dplyr)
 library(msm)
 library(xtable)
 library(data.table)
-library(tidyr)
+library(dtplyr)
 
 extract_pitches <- function(target_pitcher, db)
 {
@@ -106,13 +106,13 @@ extract_pitches <- function(target_pitcher, db)
   prev_pitch_type <- lag(data$pitch_type, 1)
   data$prev_pitch_type <- prev_pitch_type
   data[data$balls == 0 & data$strikes == 0, ]$prev_pitch_type <- NA
-  data <- data[!is.na(data$prev_pitch_type),]
+  #data <- data[!is.na(data$prev_pitch_type),]
   
   # retrieve 2 previous pitch ball type
   prevprev_pitch_type <- lag(data$prev_pitch_type, 1)
   data$prevprev_pitch_type <- prevprev_pitch_type
   data[(data$balls == 0 & data$strikes == 0) | (data$balls == 1 & data$strikes == 0) | (data$balls == 0 & data$strikes == 1), ]$prevprev_pitch_type <- NA
-  data <- data[!is.na(data$prevprev_pitch_type),]
+  #data <- data[!is.na(data$prevprev_pitch_type),]
   
   # Drop NA pitch_type
   data <- data[!is.na(data$pitch_type),]
@@ -171,7 +171,7 @@ extract_pitches <- function(target_pitcher, db)
 # get pitchers list
 
 
-db <- src_sqlite('~/Documents/Github/DB/pitchRx_14_16.sqlite3')
+db <- src_sqlite('~/Documents/Github/DB/pitchRx_14_17.sqlite3')
 
 pitchers = read.table("pitchers.txt", 
                       sep="\n",
@@ -185,3 +185,4 @@ for (pitcher in pitchers$target_pitcher)
   
   extract_pitches(pitcher, db)
 }
+

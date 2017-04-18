@@ -28,7 +28,7 @@ def main():
     print("Number of labels: %d" %n_labels)
     print("Number of features: %d" %n_features)
     print("Number of instances: %d" %n_samples)
-    
+
     # declare variables
     x = tf.placeholder(tf.float32, [None, n_features])
     W = tf.Variable(tf.zeros([n_features, n_labels]))
@@ -71,7 +71,7 @@ def main():
     X_train, y_train = shuffle(X_train, y_train)
 
     # train by batch iterations
-    iterations = 1000
+    iterations = 10000
     for i in range(iterations):
         #print "EPOCH: %d" % index_in_epoch
         if index_in_epoch > n_samples:
