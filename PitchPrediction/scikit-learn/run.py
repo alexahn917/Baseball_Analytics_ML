@@ -3,6 +3,7 @@ import csv
 import pickle
 import numpy as np
 import pandas as pd
+import copy
 from sklearn import datasets, svm, metrics
 from sklearn.svm import LinearSVC
 from sklearn.multiclass import OneVsRestClassifier
@@ -18,12 +19,11 @@ from sklearn.model_selection import cross_val_score
 from sklearn.feature_extraction import DictVectorizer as DV
 
 def main():
-    with open("../pitchers.txt", "r") as f:
+    with open("../pitchers_0.txt", "r") as f:
         names = f.read().split('\n')
-        #print(names)
 
-    #model_names = ['svm', 'nn', 'rf']
-    model_names = ['nn']
+    model_names = ['svm', 'nn', 'rf']
+    #model_names = ['nn']
     #model_names = ['svm']
     #model_names = ['rf']
     
@@ -31,19 +31,18 @@ def main():
     
     # Train, Test, Write Results
     for pitcher_name in names:
-        test_data, train_data = readCSV(pitcher_name)
-        
+        train_data, test_data = readCSV(pitcher_name)
         #test_data, train_data = readFullCSV(pitcher_name)
         
         scores = []
         for model_name in model_names:
-            train(train_data, pitcher_name, model_name, grid_search=True)
+            train(train_data, pitcher_name, model_name, grid_search=False)
             clf = load(pitcher_name)
             scores.append((model_name, predict(clf, test_data, pitcher_name, model_name, True), clf))
 
         scores.sort(key=lambda tup:tup[1], reverse=True)
         print(scores)
-        write_best_scores(scores, pitcher_name)
+        write_best_scores(scores, pitcher_name, test_data[1])
 
     # Making predictions
     
@@ -99,7 +98,6 @@ def predict_atbat(clf):
     X[22] = int(val) if val else -1
     print(clf.predict(X))
 
-
 def readCSV(pitcher_name):
     train_csv_file = '../ETL pipeline/CSV/raw/' + pitcher_name + '_train' + '.csv'
     test_csv_file = '../ETL pipeline/CSV/raw/' + pitcher_name + '_test' + '.csv'
@@ -108,20 +106,38 @@ def readCSV(pitcher_name):
     y_train = X_train['pitch_type']
     X_train.drop('pitch_type', axis = 1, inplace=True)
 
-
     X_test = pd.DataFrame.from_csv(test_csv_file, index_col=None)
     y_test = X_test['pitch_type']
     X_test.drop('pitch_type', axis = 1, inplace=True)
 
-
-    #string_cols = ['prev_pitch_type', 'prevprev_pitch_type']
-    #dict_vect = DV(sparse = False)
-    #instances_num = instances.drop(string_cols, axis = 1)
-    #instances_str = instances[string_cols].to_dict(orient = 'records')
-    #instances_str_vectorized = dict_vect.fit_transform(instances_str)
-    #instances_vec = np.hstack((instances_num, instances_str_vectorized))
-    
+    # populate data to equalize distribution
+    X_train, y_train = populateData(X_train, y_train)
     return [X_train, y_train], [X_test, y_test]
+
+def populateData(X_train, y_train):
+    labels = np.unique(y_train)
+    labels_counts = []
+    for label in labels:
+        labels_counts.append((label,np.sum(y_train == label)))
+    labels_counts.sort(key=lambda tup:tup[1], reverse=True)
+    
+    max_counts = labels_counts[0][1]
+    #print("Max Counts:%d" %max_counts)
+
+    # sample rest of the smaller labeled datasets and append
+    for i in range(1, len(labels_counts)):
+        sample_size = max_counts - labels_counts[i][1]
+        curr_label = labels_counts[i][0]
+        #print("Label %s is %d many short in numbers"%(labels_counts[i][0], max_counts - labels_counts[i][1]))
+        indicies = [i for i, x in enumerate(y_train==curr_label) if x]
+        sampled_idx = np.random.choice(indicies, sample_size, replace=True)
+        X_train = X_train.append(X_train.iloc[sampled_idx], ignore_index=True)
+        y_train = y_train.append(pd.Series([curr_label] * sample_size), ignore_index=True)
+    
+    perm_idx = np.random.permutation(y_train.index)
+    X_train = X_train.reindex(perm_idx)
+    y_train = y_train.reindex(perm_idx)
+    return X_train, y_train
 
 
 def readFullCSV(pitcher_name):
@@ -159,7 +175,7 @@ def train(data, pitcher_name, model_name, grid_search):
     # grid search
     if grid_search:
         param_grid = get_param_grid(model_name)
-        grid_search = GridSearchCV(clf, param_grid=param_grid, n_jobs=-1, scoring='f1_macro')
+        grid_search = GridSearchCV(clf, param_grid=param_grid, n_jobs=-1)#, scoring='f1_macro')
         print("\nfitting..")
         print(param_grid)
         grid_search.fit(X, y)
@@ -248,13 +264,14 @@ def write_results(act, pred, pitcher_name, model_name):
       f.write("\n\n")
 
 
-def write_best_scores(scores, pitcher_name):
+def write_best_scores(scores, pitcher_name, data):
     with open("../classifiers/results/best-results.txt", "a") as f:
         model_name, score, clf = scores[0]
         f.write(pitcher_name + ":\n")
         f.write("----------------------------------------------------\n")
         f.write("model: %s\n" % model_name)
         f.write(str(clf))
+        f.write("\n\n classes: %s" %(np.unique(data)))
         f.write("\n score: %f\n" %float(score))
         f.write("\n\n")
         file_name = "../classifiers/best/" + pitcher_name + ".pkl"

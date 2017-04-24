@@ -1,0 +1,295 @@
+RESULTS:
+
+Clayton Kershaw:
+----------------------------------------------------
+             precision    recall  f1-score   support
+
+         CU       0.19      0.02      0.03       389
+         FF       0.55      0.88      0.67      1189
+         SL       0.37      0.18      0.24       703
+
+avg / total       0.43      0.51      0.43      2281
+
+
+Max Scherzer:
+----------------------------------------------------
+             precision    recall  f1-score   support
+
+         CH       0.12      0.01      0.01       393
+         FF       0.64      0.97      0.77      1490
+         SL       0.40      0.06      0.10       450
+
+avg / total       0.51      0.63      0.51      2333
+
+
+Chris Sale:
+----------------------------------------------------
+             precision    recall  f1-score   support
+
+         CH       0.37      0.09      0.14       595
+         FT       0.55      0.90      0.68      1255
+         SL       0.42      0.13      0.19       501
+
+avg / total       0.48      0.53      0.44      2351
+
+
+Madison Bumgarner:
+----------------------------------------------------
+             precision    recall  f1-score   support
+
+         CU       0.40      0.07      0.11       477
+         FF       0.48      0.74      0.58      1003
+         SL       0.41      0.33      0.37       765
+
+avg / total       0.44      0.46      0.41      2245
+
+
+Noah Syndergaard:
+----------------------------------------------------
+             precision    recall  f1-score   support
+
+         FF       0.68      0.79      0.73       477
+         SI       0.59      0.45      0.51       324
+
+avg / total       0.64      0.65      0.64       801
+
+
+Corey Kluber:
+----------------------------------------------------
+             precision    recall  f1-score   support
+
+         CU       0.30      0.10      0.15       393
+         SI       0.55      0.81      0.65      1062
+         SL       0.29      0.17      0.21       563
+
+avg / total       0.43      0.49      0.43      2018
+
+
+Justin Verlander:
+----------------------------------------------------
+             precision    recall  f1-score   support
+
+         CU       0.24      0.03      0.06       348
+         FF       0.64      0.97      0.77      1326
+         SL       0.29      0.03      0.05       418
+
+avg / total       0.50      0.62      0.51      2092
+
+
+Jon Lester:
+----------------------------------------------------
+             precision    recall  f1-score   support
+
+         FC       0.45      0.15      0.22       487
+         FF       0.71      0.92      0.80      1082
+
+avg / total       0.63      0.68      0.62      1569
+
+
+Jake Arrieta:
+----------------------------------------------------
+             precision    recall  f1-score   support
+
+         FF       0.45      0.25      0.32       458
+         SI       0.52      0.63      0.57       807
+         SL       0.39      0.40      0.40       610
+
+avg / total       0.46      0.46      0.45      1875
+
+
+Yu Darvish:
+----------------------------------------------------
+             precision    recall  f1-score   support
+
+         FF       0.53      0.83      0.64       385
+         FT       0.47      0.13      0.21       166
+         SL       0.41      0.22      0.28       224
+
+avg / total       0.48      0.50      0.45       775
+
+
+Johnny Cueto:
+----------------------------------------------------
+             precision    recall  f1-score   support
+
+         CH       0.29      0.17      0.21       448
+         FC       0.26      0.23      0.25       442
+         FF       0.34      0.52      0.41       610
+         FT       0.37      0.30      0.33       513
+
+avg / total       0.32      0.32      0.31      2013
+
+
+Stephen Strasburg:
+----------------------------------------------------
+             precision    recall  f1-score   support
+
+         CH       0.26      0.08      0.12       316
+         CU       0.19      0.03      0.05       336
+         FF       0.58      0.91      0.71       907
+
+avg / total       0.43      0.55      0.45      1559
+
+
+Carlos Carrasco:
+----------------------------------------------------
+             precision    recall  f1-score   support
+
+         CH       0.41      0.19      0.26       345
+         FF       0.56      0.83      0.67       634
+         FT       0.34      0.18      0.23       245
+
+avg / total       0.47      0.52      0.47      1224
+
+
+Michael Fulmer:
+----------------------------------------------------
+             precision    recall  f1-score   support
+
+         CH       1.00      0.03      0.06        30
+         FF       0.49      0.59      0.54       108
+         FT       0.34      0.23      0.28        52
+         SL       0.23      0.32      0.27        63
+
+avg / total       0.46      0.38      0.36       253
+
+
+Jameson Taillon:
+----------------------------------------------------
+             precision    recall  f1-score   support
+
+         CU       0.33      0.13      0.19        31
+         FF       0.00      0.00      0.00        11
+         FT       0.65      0.90      0.75        73
+
+avg / total       0.50      0.61      0.53       115
+
+
+James Paxton:
+----------------------------------------------------
+             precision    recall  f1-score   support
+
+         FF       0.83      0.98      0.90       464
+         KC       0.30      0.03      0.06        96
+
+avg / total       0.74      0.82      0.76       560
+
+
+Aaron Nola:
+----------------------------------------------------
+             precision    recall  f1-score   support
+
+         CU       0.37      0.33      0.35       153
+         FF       0.49      0.41      0.45       114
+         FT       0.50      0.08      0.14        12
+         SI       0.46      0.60      0.52       153
+
+avg / total       0.44      0.44      0.43       432
+
+
+Masahiro Tanaka:
+----------------------------------------------------
+             precision    recall  f1-score   support
+
+         FF       0.37      0.26      0.31       231
+         FS       0.38      0.52      0.43       314
+         SI       0.35      0.34      0.35       248
+         SL       0.21      0.17      0.19       240
+
+avg / total       0.33      0.34      0.33      1033
+
+
+Zack Greinke:
+----------------------------------------------------
+             precision    recall  f1-score   support
+
+         CH       0.46      0.10      0.17       164
+         FF       0.72      0.97      0.82       776
+         SL       0.44      0.08      0.14       178
+
+avg / total       0.63      0.70      0.62      1118
+
+
+Jose Quintana:
+----------------------------------------------------
+             precision    recall  f1-score   support
+
+         CU       0.53      0.11      0.18       356
+         FF       0.67      0.95      0.79       687
+
+avg / total       0.62      0.66      0.58      1043
+
+
+Julio Teheran:
+----------------------------------------------------
+             precision    recall  f1-score   support
+
+         FF       0.58      0.91      0.71       750
+         FT       0.50      0.11      0.18       264
+         SL       0.34      0.12      0.18       329
+
+avg / total       0.51      0.56      0.48      1343
+
+
+Sean Manaea:
+----------------------------------------------------
+             precision    recall  f1-score   support
+
+         CH       0.00      0.00      0.00         5
+         FF       0.86      1.00      0.93        31
+
+avg / total       0.74      0.86      0.80        36
+
+
+Danny Duffy:
+----------------------------------------------------
+             precision    recall  f1-score   support
+
+         CU       0.41      0.17      0.24       296
+         FF       0.62      0.88      0.73       627
+         FT       0.52      0.27      0.36       171
+
+avg / total       0.55      0.59      0.54      1094
+
+
+Kyle Hendricks:
+----------------------------------------------------
+             precision    recall  f1-score   support
+
+         CH       0.33      0.06      0.10       100
+         SI       0.78      0.96      0.86       339
+
+avg / total       0.68      0.76      0.69       439
+
+
+Lance McCullers:
+----------------------------------------------------
+             precision    recall  f1-score   support
+
+         FF       0.68      0.61      0.64       299
+         KC       0.59      0.66      0.62       253
+
+avg / total       0.64      0.63      0.63       552
+
+
+Matt Harvey:
+----------------------------------------------------
+             precision    recall  f1-score   support
+
+         FF       0.54      0.75      0.63       154
+         FT       0.47      0.46      0.46       107
+         SL       0.53      0.20      0.29        94
+
+avg / total       0.52      0.52      0.49       355
+
+
+Dallas Keuchel:
+----------------------------------------------------
+             precision    recall  f1-score   support
+
+         FT       0.60      0.71      0.65       168
+         SL       0.61      0.49      0.54       154
+
+avg / total       0.61      0.61      0.60       322
+
+

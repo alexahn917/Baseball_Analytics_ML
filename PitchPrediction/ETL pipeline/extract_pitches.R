@@ -135,7 +135,7 @@ extract_pitches <- function(target_pitcher, db)
   data <- data[data$pitch_type %in% used_pitch_types,]
   
   # Only use instances where type confidence is at least 0.90
-  data <- data[data$type_confidence > 0.85,]
+  data <- data[data$type_confidence > 0.95,]
   data <- data[, !names(data) %in% "type_confidence"]
   
   # convert NAs
@@ -174,7 +174,7 @@ extract_pitches <- function(target_pitcher, db)
 
 db <- src_sqlite('~/Documents/Github/DB/pitchRx_14_17.sqlite3')
 
-pitchers = read.table("pitchers_1.txt", 
+pitchers = read.table("pitchers_0.txt", 
                       sep="\n",
                       fill=FALSE,
                       col.names= "target_pitcher",
