@@ -1,14 +1,15 @@
 library(RSQLite)
-library(dplyr)
 library(msm)
 library(xtable)
 library(data.table)
+library(dplyr)
+library(tidyr)
 library(dtplyr)
 
 extract_pitches <- function(target_pitcher, db)
 {
   #db <- src_sqlite('~/Documents/Github/DB/pitchRx_14_16.sqlite3')
-  #target_pitcher = "Clayton Kershaw"
+  #target_pitcher = "Jacob deGrom"
   
   # Join the location and names table into a new que table.
   pitch <- dbGetQuery(db$con, 'SELECT pitch_type, inning, count, on_1b, on_2b, on_3b, type_confidence,
@@ -129,12 +130,12 @@ extract_pitches <- function(target_pitcher, db)
   pitch_type_props <- pitch_type_props[order(-pitch_type_props$value),]
   #print(pitch_type_props)
   
-  # Drop levels that are not useful (Under proportions of 0.05)
-  used_pitch_types <- pitch_type_props$pitch_labels[pitch_type_props$value > 0.10]
+  # Drop levels that are not useful (Under proportions of 0.15)
+  used_pitch_types <- pitch_type_props$pitch_labels[pitch_type_props$value > 0.15]
   data <- data[data$pitch_type %in% used_pitch_types,]
   
   # Only use instances where type confidence is at least 0.90
-  data <- data[data$type_confidence > 0.90,]
+  data <- data[data$type_confidence > 0.85,]
   data <- data[, !names(data) %in% "type_confidence"]
   
   # convert NAs
@@ -173,7 +174,7 @@ extract_pitches <- function(target_pitcher, db)
 
 db <- src_sqlite('~/Documents/Github/DB/pitchRx_14_17.sqlite3')
 
-pitchers = read.table("pitchers.txt", 
+pitchers = read.table("pitchers_1.txt", 
                       sep="\n",
                       fill=FALSE,
                       col.names= "target_pitcher",
@@ -182,7 +183,6 @@ pitchers = read.table("pitchers.txt",
 # iterate over pitchers
 for (pitcher in pitchers$target_pitcher) 
 {
-  
   extract_pitches(pitcher, db)
 }
 

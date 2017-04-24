@@ -77,19 +77,10 @@
 			}
 		},
 		{
-			"file": "tensorflow/rnn.py",
-			"settings":
-			{
-				"buffer_size": 0,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "classifiers/results/best-results.txt",
 			"settings":
 			{
-				"buffer_size": 10,
+				"buffer_size": 5326,
 				"line_ending": "Unix"
 			}
 		},
@@ -97,7 +88,7 @@
 			"file": "classifiers/results/nn-results.txt",
 			"settings":
 			{
-				"buffer_size": 10,
+				"buffer_size": 3700,
 				"line_ending": "Unix"
 			}
 		},
@@ -180,6 +171,7 @@
 	],
 	"file_history":
 	[
+		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/tensorflow/rnn.py",
 		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/tensorflow/run_tensor_1.py",
 		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/tensorflow/run_tensor.py",
 		"/Users/alex/Documents/GitHub/Baseball_Analytics_ML/PitchPrediction/tensorflow/minst_deep_test.py",
@@ -345,8 +337,8 @@
 						"selection":
 						[
 							[
-								6555,
-								6555
+								79,
+								79
 							]
 						],
 						"settings":
@@ -355,8 +347,8 @@
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
-						"translation.y": 3383.0,
+						"translation.x": 83.0,
+						"translation.y": 132.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -364,24 +356,26 @@
 				},
 				{
 					"buffer": 1,
-					"file": "tensorflow/rnn.py",
+					"file": "classifiers/results/best-results.txt",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 5326,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								4598,
+								4598
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.sublime-syntax"
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 7,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -392,49 +386,49 @@
 				},
 				{
 					"buffer": 2,
-					"file": "classifiers/results/best-results.txt",
+					"file": "classifiers/results/nn-results.txt",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 10,
+						"buffer_size": 3700,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10,
-								10
+								1125,
+								1125
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 6,
+							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1794.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "classifiers/results/nn-results.txt",
+					"file": "classifiers/results/svm-results.txt",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 10,
+						"buffer_size": 3700,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10,
-								10
+								681,
+								681
 							]
 						],
 						"settings":
@@ -452,36 +446,6 @@
 				},
 				{
 					"buffer": 4,
-					"file": "classifiers/results/svm-results.txt",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3700,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								10,
-								10
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
 					"file": "classifiers/results/rf-results.txt",
 					"semi_transient": false,
 					"settings":
@@ -493,8 +457,8 @@
 						"selection":
 						[
 							[
-								10,
-								10
+								1182,
+								1182
 							]
 						],
 						"settings":
@@ -504,10 +468,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1766.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
