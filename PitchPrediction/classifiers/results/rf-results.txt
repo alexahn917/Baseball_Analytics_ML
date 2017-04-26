@@ -2,294 +2,271 @@ RESULTS:
 
 Clayton Kershaw:
 ----------------------------------------------------
-             precision    recall  f1-score   support
+               precision    recall  f1-score   support
 
-         CU       0.34      0.42      0.38       389
-         FF       0.64      0.68      0.66      1189
-         SL       0.38      0.30      0.33       703
+    CurveBall       0.36      0.44      0.40       243
+     Fastball       0.62      0.66      0.64       754
+Slider/Cutter       0.42      0.33      0.37       492
 
-avg / total       0.51      0.52      0.51      2281
+  avg / total       0.51      0.52      0.51      1489
 
 
 Max Scherzer:
 ----------------------------------------------------
-             precision    recall  f1-score   support
+               precision    recall  f1-score   support
 
-         CH       0.28      0.33      0.30       393
-         FF       0.68      0.66      0.67      1490
-         SL       0.35      0.33      0.34       450
+     ChangeUp       0.30      0.34      0.32       227
+     Fastball       0.59      0.55      0.57       571
+Slider/Cutter       0.41      0.41      0.41       202
 
-avg / total       0.55      0.54      0.54      2333
+  avg / total       0.49      0.48      0.48      1000
 
 
 Chris Sale:
 ----------------------------------------------------
-             precision    recall  f1-score   support
+               precision    recall  f1-score   support
 
-         CH       0.36      0.40      0.38       595
-         FT       0.58      0.56      0.57      1255
-         SL       0.33      0.31      0.32       501
+     ChangeUp       0.41      0.44      0.42       357
+     Fastball       0.53      0.53      0.53       585
+Slider/Cutter       0.28      0.26      0.27       191
 
-avg / total       0.47      0.47      0.47      2351
+  avg / total       0.45      0.45      0.45      1133
 
 
 Madison Bumgarner:
 ----------------------------------------------------
-             precision    recall  f1-score   support
+               precision    recall  f1-score   support
 
-         CU       0.36      0.35      0.35       477
-         FF       0.50      0.56      0.53      1003
-         SL       0.42      0.36      0.38       765
+    CurveBall       0.34      0.43      0.38       174
+     Fastball       0.52      0.49      0.50       334
+Slider/Cutter       0.44      0.40      0.42       244
 
-avg / total       0.44      0.45      0.44      2245
-
-
-Noah Syndergaard:
-----------------------------------------------------
-             precision    recall  f1-score   support
-
-         FF       0.70      0.76      0.73       477
-         SI       0.59      0.51      0.55       324
-
-avg / total       0.65      0.66      0.66       801
+  avg / total       0.45      0.44      0.45       752
 
 
 Corey Kluber:
 ----------------------------------------------------
-             precision    recall  f1-score   support
+               precision    recall  f1-score   support
 
-         CU       0.33      0.38      0.35       393
-         SI       0.58      0.58      0.58      1062
-         SL       0.34      0.30      0.32       563
+    CurveBall       0.32      0.33      0.33       244
+     Fastball       0.69      0.72      0.70       954
+Slider/Cutter       0.35      0.31      0.33       344
 
-avg / total       0.46      0.47      0.46      2018
+  avg / total       0.56      0.56      0.56      1542
 
 
 Justin Verlander:
 ----------------------------------------------------
-             precision    recall  f1-score   support
+               precision    recall  f1-score   support
 
-         CU       0.24      0.24      0.24       348
-         FF       0.67      0.73      0.70      1326
-         SL       0.27      0.20      0.23       418
+    CurveBall       0.25      0.29      0.27       235
+     Fastball       0.69      0.70      0.69       955
+Slider/Cutter       0.23      0.19      0.20       275
 
-avg / total       0.52      0.54      0.53      2092
+  avg / total       0.53      0.54      0.53      1465
 
 
 Jon Lester:
 ----------------------------------------------------
-             precision    recall  f1-score   support
+               precision    recall  f1-score   support
 
-         FC       0.44      0.47      0.46       487
-         FF       0.75      0.73      0.74      1082
+     Fastball       0.70      0.79      0.74       306
+Slider/Cutter       0.62      0.50      0.55       209
 
-avg / total       0.66      0.65      0.65      1569
+  avg / total       0.67      0.67      0.66       515
 
 
 Jake Arrieta:
 ----------------------------------------------------
-             precision    recall  f1-score   support
+               precision    recall  f1-score   support
 
-         FF       0.38      0.42      0.40       458
-         SI       0.51      0.52      0.52       807
-         SL       0.41      0.37      0.39       610
+     Fastball       0.65      0.72      0.69       474
+Slider/Cutter       0.50      0.42      0.46       314
 
-avg / total       0.45      0.44      0.44      1875
+  avg / total       0.59      0.60      0.59       788
 
 
 Yu Darvish:
 ----------------------------------------------------
-             precision    recall  f1-score   support
+               precision    recall  f1-score   support
 
-         FF       0.59      0.66      0.63       385
-         FT       0.46      0.42      0.44       166
-         SL       0.39      0.34      0.36       224
+     Fastball       0.64      0.76      0.70       274
+Slider/Cutter       0.55      0.41      0.47       198
 
-avg / total       0.51      0.52      0.51       775
+  avg / total       0.60      0.61      0.60       472
 
 
 Johnny Cueto:
 ----------------------------------------------------
-             precision    recall  f1-score   support
+               precision    recall  f1-score   support
 
-         CH       0.30      0.33      0.31       448
-         FC       0.28      0.30      0.29       442
-         FF       0.36      0.33      0.35       610
-         FT       0.41      0.38      0.39       513
+     ChangeUp       0.28      0.28      0.28       235
+     Fastball       0.50      0.58      0.54       745
+Slider/Cutter       0.46      0.38      0.42       630
 
-avg / total       0.34      0.34      0.34      2013
+  avg / total       0.45      0.46      0.45      1610
 
 
 Stephen Strasburg:
 ----------------------------------------------------
              precision    recall  f1-score   support
 
-         CH       0.29      0.33      0.31       316
-         CU       0.30      0.30      0.30       336
-         FF       0.63      0.60      0.61       907
+   ChangeUp       0.33      0.35      0.34       205
+  CurveBall       0.25      0.26      0.26       207
+   Fastball       0.68      0.66      0.67       690
 
-avg / total       0.49      0.48      0.48      1559
+avg / total       0.53      0.53      0.53      1102
 
 
 Carlos Carrasco:
 ----------------------------------------------------
              precision    recall  f1-score   support
 
-         CH       0.40      0.43      0.42       345
-         FF       0.63      0.64      0.63       634
-         FT       0.31      0.25      0.28       245
+   ChangeUp       0.34      0.35      0.34       116
+   Fastball       0.77      0.76      0.77       339
 
-avg / total       0.50      0.50      0.50      1224
+avg / total       0.66      0.66      0.66       455
 
 
 Michael Fulmer:
 ----------------------------------------------------
-             precision    recall  f1-score   support
+               precision    recall  f1-score   support
 
-         CH       0.28      0.43      0.34        30
-         FF       0.55      0.49      0.52       108
-         FT       0.37      0.38      0.38        52
-         SL       0.25      0.22      0.23        63
+     ChangeUp       0.24      0.23      0.24        30
+     Fastball       0.60      0.64      0.62       148
+Slider/Cutter       0.31      0.28      0.29        75
 
-avg / total       0.41      0.40      0.40       253
+  avg / total       0.47      0.48      0.48       253
 
 
 Jameson Taillon:
 ----------------------------------------------------
              precision    recall  f1-score   support
 
-         CU       0.38      0.45      0.41        31
-         FF       0.14      0.18      0.16        11
-         FT       0.80      0.70      0.74        73
+  CurveBall       0.36      0.44      0.40        36
+   Fastball       0.71      0.63      0.67        79
 
-avg / total       0.62      0.58      0.60       115
+avg / total       0.60      0.57      0.58       115
 
 
 James Paxton:
 ----------------------------------------------------
              precision    recall  f1-score   support
 
-         FF       0.85      0.91      0.88       464
-         KC       0.35      0.24      0.29        96
+   Fastball       0.85      0.90      0.87       466
+KnuckleBall       0.38      0.28      0.33       106
 
-avg / total       0.77      0.79      0.78       560
+avg / total       0.76      0.78      0.77       572
 
 
 Aaron Nola:
 ----------------------------------------------------
              precision    recall  f1-score   support
 
-         CU       0.45      0.48      0.47       153
-         FF       0.52      0.54      0.53       114
-         FT       0.43      0.25      0.32        12
-         SI       0.54      0.50      0.52       153
+  CurveBall       0.49      0.50      0.50       155
+   Fastball       0.72      0.70      0.71       277
 
-avg / total       0.50      0.50      0.50       432
+avg / total       0.63      0.63      0.63       432
 
 
 Masahiro Tanaka:
 ----------------------------------------------------
-             precision    recall  f1-score   support
+               precision    recall  f1-score   support
 
-         FF       0.34      0.39      0.37       231
-         FS       0.42      0.44      0.43       314
-         SI       0.38      0.37      0.38       248
-         SL       0.30      0.25      0.27       240
+     Fastball       0.75      0.83      0.79       800
+Slider/Cutter       0.34      0.23      0.28       294
 
-avg / total       0.37      0.37      0.37      1033
+  avg / total       0.64      0.67      0.65      1094
 
 
 Zack Greinke:
 ----------------------------------------------------
-             precision    recall  f1-score   support
+               precision    recall  f1-score   support
 
-         CH       0.36      0.46      0.40       164
-         FF       0.81      0.77      0.79       776
-         SL       0.39      0.37      0.38       178
+     ChangeUp       0.34      0.36      0.35       179
+     Fastball       0.80      0.81      0.80      1023
+Slider/Cutter       0.33      0.27      0.30       176
 
-avg / total       0.67      0.66      0.67      1118
+  avg / total       0.68      0.68      0.68      1378
 
 
 Jose Quintana:
 ----------------------------------------------------
              precision    recall  f1-score   support
 
-         CU       0.47      0.52      0.49       356
-         FF       0.74      0.69      0.72       687
+  CurveBall       0.35      0.42      0.38       330
+   Fastball       0.76      0.71      0.73       868
 
-avg / total       0.65      0.64      0.64      1043
+avg / total       0.65      0.63      0.64      1198
 
 
 Julio Teheran:
 ----------------------------------------------------
-             precision    recall  f1-score   support
+               precision    recall  f1-score   support
 
-         FF       0.62      0.68      0.65       750
-         FT       0.42      0.37      0.39       264
-         SL       0.32      0.29      0.30       329
+     Fastball       0.78      0.83      0.80      1018
+Slider/Cutter       0.33      0.27      0.30       325
 
-avg / total       0.51      0.52      0.52      1343
+  avg / total       0.67      0.69      0.68      1343
 
 
 Sean Manaea:
 ----------------------------------------------------
              precision    recall  f1-score   support
 
-         CH       0.00      0.00      0.00         5
-         FF       0.84      0.87      0.86        31
+   ChangeUp       0.00      0.00      0.00         3
+   Fastball       0.91      0.94      0.93        33
 
-avg / total       0.73      0.75      0.74        36
+avg / total       0.84      0.86      0.85        36
 
 
 Danny Duffy:
 ----------------------------------------------------
              precision    recall  f1-score   support
 
-         CU       0.37      0.39      0.38       296
-         FF       0.66      0.67      0.67       627
-         FT       0.41      0.35      0.38       171
+  CurveBall       0.39      0.45      0.42       292
+   Fastball       0.79      0.74      0.76       802
 
-avg / total       0.54      0.55      0.54      1094
+avg / total       0.68      0.66      0.67      1094
 
 
 Kyle Hendricks:
 ----------------------------------------------------
              precision    recall  f1-score   support
 
-         CH       0.43      0.47      0.45       100
-         SI       0.84      0.82      0.83       339
+   ChangeUp       0.45      0.42      0.44       120
+   Fastball       0.80      0.82      0.81       344
 
-avg / total       0.75      0.74      0.74       439
+avg / total       0.71      0.72      0.71       464
 
 
 Lance McCullers:
 ----------------------------------------------------
              precision    recall  f1-score   support
 
-         FF       0.63      0.65      0.64       299
-         KC       0.57      0.55      0.56       253
+   Fastball       0.66      0.75      0.70       307
+KnuckleBall       0.64      0.54      0.59       256
 
-avg / total       0.61      0.61      0.61       552
+avg / total       0.65      0.65      0.65       563
 
 
 Matt Harvey:
 ----------------------------------------------------
-             precision    recall  f1-score   support
+               precision    recall  f1-score   support
 
-         FF       0.56      0.58      0.57       154
-         FT       0.45      0.53      0.49       107
-         SL       0.38      0.27      0.31        94
+     Fastball       0.78      0.84      0.81       268
+Slider/Cutter       0.35      0.26      0.30        87
 
-avg / total       0.48      0.48      0.48       355
+  avg / total       0.68      0.70      0.69       355
 
 
 Dallas Keuchel:
 ----------------------------------------------------
-             precision    recall  f1-score   support
+               precision    recall  f1-score   support
 
-         FT       0.63      0.75      0.69       168
-         SL       0.66      0.53      0.58       154
+     Fastball       0.72      0.71      0.72       325
+Slider/Cutter       0.51      0.51      0.51       187
 
-avg / total       0.65      0.64      0.64       322
+  avg / total       0.64      0.64      0.64       512
 
 

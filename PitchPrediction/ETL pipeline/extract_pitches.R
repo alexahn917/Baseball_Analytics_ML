@@ -86,22 +86,27 @@ extract_pitches <- function(target_pitcher, db)
   
   # convert pitch ball types into integer classes
   data$pitch_type <- as.character(data$pitch_type)
-  #data$pitch_type[data$pitch_type == 'FA'] <- 1
-  #data$pitch_type[data$pitch_type == 'FF'] <- 2
-  #data$pitch_type[data$pitch_type == 'FT'] <- 3
-  #data$pitch_type[data$pitch_type == 'FC'] <- 4
-  #data$pitch_type[data$pitch_type == 'FS'] <- 5
-  #data$pitch_type[data$pitch_type == 'SI'] <- 6
-  #data$pitch_type[data$pitch_type == 'SF'] <- 7
-  #data$pitch_type[data$pitch_type == 'SL'] <- 8
-  #data$pitch_type[data$pitch_type == 'CH'] <- 9
-  #data$pitch_type[data$pitch_type == 'CB'] <- 10
-  #data$pitch_type[data$pitch_type == 'CU'] <- 11
-  #data$pitch_type[data$pitch_type == 'KC'] <- 12
-  #data$pitch_type[data$pitch_type == 'KN'] <- 13
-  #data$pitch_type[data$pitch_type == 'EP'] <- 14
-  #data$pitch_type[data$pitch_type == 'IN'] <- 15
-  #data$pitch_type[data$pitch_type == 'PO'] <- 16
+  data$pitch_type[data$pitch_type == 'FA'] <- 'Fastball'
+  data$pitch_type[data$pitch_type == 'FF'] <- 'Fastball'
+  data$pitch_type[data$pitch_type == 'FT'] <- 'Fastball'
+  data$pitch_type[data$pitch_type == 'FS'] <- 'Fastball'
+  data$pitch_type[data$pitch_type == 'SI'] <- 'Fastball'
+  data$pitch_type[data$pitch_type == 'SF'] <- 'Fastball'
+  
+  data$pitch_type[data$pitch_type == 'FC'] <- 'Slider/Cutter'
+  data$pitch_type[data$pitch_type == 'SL'] <- 'Slider/Cutter'
+  
+  data$pitch_type[data$pitch_type == 'CH'] <- 'ChangeUp'
+  
+  data$pitch_type[data$pitch_type == 'CB'] <- 'CurveBall'
+  data$pitch_type[data$pitch_type == 'CU'] <- 'CurveBall'
+  
+  data$pitch_type[data$pitch_type == 'KC'] <- 'KnuckleBall'
+  data$pitch_type[data$pitch_type == 'KN'] <- 'KnuckleBall'
+  
+  data$pitch_type[data$pitch_type == 'EP'] <- 'Others'
+  data$pitch_type[data$pitch_type == 'IN'] <- 'Others'
+  data$pitch_type[data$pitch_type == 'PO'] <- 'Others'
 
   # retrieve previous pitch ball type
   prev_pitch_type <- lag(data$pitch_type, 1)
