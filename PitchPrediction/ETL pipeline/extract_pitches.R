@@ -9,14 +9,18 @@ library(dtplyr)
 extract_pitches <- function(target_pitcher, db)
 {
   #db <- src_sqlite('~/Documents/Github/DB/pitchRx_14_16.sqlite3')
-  #target_pitcher = "Jacob deGrom"
+  #target_pitcher = "Clayton Kershaw"
+  
+  #dbListTables(db$con)
+  #dbListFields(db$con, "pitch")
   
   # Join the location and names table into a new que table.
   pitch <- dbGetQuery(db$con, 'SELECT pitch_type, inning, count, on_1b, on_2b, on_3b, type_confidence,
                       num, gameday_link FROM pitch')
   
   names <- dbGetQuery(db$con, 'SELECT pitcher AS pitcher_id, pitcher_name, batter AS batter_id, 
-                      batter_name, num, b_height, gameday_link, home_team_runs, away_team_runs, o AS out, p_throws as pitch_rl, stand as bat_rl FROM atbat') #stand?
+                      batter_name, num, b_height, gameday_link, home_team_runs, away_team_runs, o AS out, p_throws as pitch_rl, stand as bat_rl FROM atbat')
+  
   filtered_names <- filter(names, pitcher_name == target_pitcher)
   
   games <- dbGetQuery(db$con, 'SELECT gameday_link, home_team_id FROM game')
@@ -34,7 +38,7 @@ extract_pitches <- function(target_pitcher, db)
 
   pitchfx <- as.data.frame(collect(que))
   pitchfx <- data.table(pitchfx[ do.call(order, pitchfx[ , c('gameday_link','inning', 'num') ] ), ])
-  pitchfx[, batter_num:=as.numeric(factor(num)), by=gameday_link]
+  #pitchfx[, batter_num:=as.numeric(factor(num)), by=gameday_link]
   pitchfx <- as.data.frame(pitchfx)
   
   # Create pitcher_at_home field
@@ -43,10 +47,6 @@ extract_pitches <- function(target_pitcher, db)
   pitcher_team_id <- as.numeric(dbGetQuery(db$con, sqlStatement))
   pitchfx$pitcher_at_home[pitchfx$home_team_id == pitcher_team_id] <- 1
   pitchfx$pitcher_at_home[pitchfx$home_team_id != pitcher_team_id] <- -1
-  
-  # Create a new field for the batting order number.
-  #pitchfx$batter_num <- ifelse(pitchfx$batter_num %% 9 == 0, 9, (pitchfx$batter_num %% 9))
-  #pitchfx$batter_num <- as.factor(pitchfx$batter_num)
   
   # factorize pitch_types
   pitchfx$pitch_type <- as.factor(pitchfx$pitch_type)
@@ -60,9 +60,9 @@ extract_pitches <- function(target_pitcher, db)
   pitchfx <- pitchfx[!is.na(pitchfx$score_diff),]
   
   # Cleaning up data df.
-  data <- as.data.frame(select(pitchfx, type_confidence, pitch_type, batter_num, pitch_rl, bat_rl, inning,
-                               count, out, on_1b, on_2b, on_3b, score_diff, 
-                               era, rbi, avg, hr, batter_num, pitcher_at_home,
+  data <- as.data.frame(select(pitchfx, type_confidence, pitch_type, pitch_rl, bat_rl, 
+                               inning, count, out, on_1b, on_2b, on_3b, score_diff, 
+                               era, rbi, avg, hr, bat_order, pitcher_at_home,
                                pitcher_wins, pitcher_losses, batter_wins, batter_losses))
   
   #pitcher$uniqueID <- paste(pitcher$num, pitcher$gameday_link, pitcher$inning, sep='')
@@ -93,8 +93,8 @@ extract_pitches <- function(target_pitcher, db)
   data$pitch_type[data$pitch_type == 'SI'] <- 'Fastball'
   data$pitch_type[data$pitch_type == 'SF'] <- 'Fastball'
   
-  data$pitch_type[data$pitch_type == 'FC'] <- 'Slider/Cutter'
-  data$pitch_type[data$pitch_type == 'SL'] <- 'Slider/Cutter'
+  data$pitch_type[data$pitch_type == 'FC'] <- 'Slider.Cutter'
+  data$pitch_type[data$pitch_type == 'SL'] <- 'Slider.Cutter'
   
   data$pitch_type[data$pitch_type == 'CH'] <- 'ChangeUp'
   
@@ -122,7 +122,7 @@ extract_pitches <- function(target_pitcher, db)
   
   # Drop NA pitch_type
   data <- data[!is.na(data$pitch_type),]
-
+  
   # Select most frequent pitch types
   pitch_labels <- levels(as.factor(data$pitch_type))
   pitch_type_props <- rep(0,length(pitch_labels))
@@ -136,7 +136,7 @@ extract_pitches <- function(target_pitcher, db)
   #print(pitch_type_props)
   
   # Drop levels that are not useful (Under proportions of 0.15)
-  used_pitch_types <- pitch_type_props$pitch_labels[pitch_type_props$value > 0.15]
+  used_pitch_types <- pitch_type_props$pitch_labels[pitch_type_props$value > 0.10]
   data <- data[data$pitch_type %in% used_pitch_types,]
   
   # Only use instances where type confidence is at least 0.90
@@ -147,7 +147,7 @@ extract_pitches <- function(target_pitcher, db)
   data <- replace(data, is.na(data), 0)
   
   # one hot encoding for pitch types
-  data <- with(data, data.frame(pitch_type, batter_num, pitch_rl, bat_rl, inning, balls, strikes, 
+  data <- with(data, data.frame(pitch_type, bat_order, pitch_rl, bat_rl, inning, balls, strikes, 
     out, on_1b, on_2b, on_3b, score_diff, era, rbi, avg, hr, pitcher_at_home, pitcher_wins, pitcher_losses, 
     batter_wins, batter_losses, model.matrix(~prev_pitch_type-1,data), model.matrix(~prevprev_pitch_type-1,data)))
 
@@ -190,4 +190,3 @@ for (pitcher in pitchers$target_pitcher)
 {
   extract_pitches(pitcher, db)
 }
-

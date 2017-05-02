@@ -12,7 +12,7 @@ MLPClassifier(activation='relu', alpha=0.0001, batch_size='auto', beta_1=0.9,
        verbose=False, warm_start=False)
 
  classes: ['CurveBall' 'Fastball' 'Slider/Cutter']
- score: 0.529183
+ score: 0.530511
 
 
 Max Scherzer:
@@ -39,21 +39,19 @@ MLPClassifier(activation='relu', alpha=0.0001, batch_size='auto', beta_1=0.9,
        verbose=False, warm_start=False)
 
  classes: ['ChangeUp' 'Fastball' 'Slider/Cutter']
- score: 0.538315
+ score: 0.522436
 
 
 Madison Bumgarner:
 ----------------------------------------------------
-model: rf
-RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
-            max_depth=None, max_features='auto', max_leaf_nodes=None,
-            min_impurity_split=1e-07, min_samples_leaf=1,
-            min_samples_split=2, min_weight_fraction_leaf=0.0,
-            n_estimators=10, n_jobs=1, oob_score=False, random_state=None,
-            verbose=0, warm_start=False)
+model: svm
+SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
 
  classes: ['CurveBall' 'Fastball' 'Slider/Cutter']
- score: 0.435019
+ score: 0.434965
 
 
 Corey Kluber:
@@ -68,7 +66,7 @@ MLPClassifier(activation='relu', alpha=0.0001, batch_size='auto', beta_1=0.9,
        verbose=False, warm_start=False)
 
  classes: ['CurveBall' 'Fastball' 'Slider/Cutter']
- score: 0.617387
+ score: 0.615413
 
 
 Justin Verlander:
@@ -85,16 +83,17 @@ SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
 
 Jon Lester:
 ----------------------------------------------------
-model: rf
-RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
-            max_depth=None, max_features='auto', max_leaf_nodes=None,
-            min_impurity_split=1e-07, min_samples_leaf=1,
-            min_samples_split=2, min_weight_fraction_leaf=0.0,
-            n_estimators=10, n_jobs=1, oob_score=False, random_state=None,
-            verbose=0, warm_start=False)
+model: nn
+MLPClassifier(activation='relu', alpha=0.0001, batch_size='auto', beta_1=0.9,
+       beta_2=0.999, early_stopping=False, epsilon=1e-08,
+       hidden_layer_sizes=(100,), learning_rate='constant',
+       learning_rate_init=0.001, max_iter=200, momentum=0.9,
+       nesterovs_momentum=True, power_t=0.5, random_state=None,
+       shuffle=True, solver='adam', tol=0.0001, validation_fraction=0.1,
+       verbose=False, warm_start=False)
 
  classes: ['Fastball' 'Slider/Cutter']
- score: 0.603736
+ score: 0.621420
 
 
 Jake Arrieta:
@@ -108,10 +107,22 @@ RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
             verbose=0, warm_start=False)
 
  classes: ['Fastball' 'Slider/Cutter']
- score: 0.616813
+ score: 0.604106
 
 
 Yu Darvish:
+----------------------------------------------------
+model: svm
+SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+
+ classes: ['Fastball' 'Slider/Cutter']
+ score: 0.563587
+
+
+Johnny Cueto:
 ----------------------------------------------------
 model: rf
 RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
@@ -121,23 +132,8 @@ RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
             n_estimators=10, n_jobs=1, oob_score=False, random_state=None,
             verbose=0, warm_start=False)
 
- classes: ['Fastball' 'Slider/Cutter']
- score: 0.602136
-
-
-Johnny Cueto:
-----------------------------------------------------
-model: nn
-MLPClassifier(activation='relu', alpha=0.0001, batch_size='auto', beta_1=0.9,
-       beta_2=0.999, early_stopping=False, epsilon=1e-08,
-       hidden_layer_sizes=(100,), learning_rate='constant',
-       learning_rate_init=0.001, max_iter=200, momentum=0.9,
-       nesterovs_momentum=True, power_t=0.5, random_state=None,
-       shuffle=True, solver='adam', tol=0.0001, validation_fraction=0.1,
-       verbose=False, warm_start=False)
-
  classes: ['ChangeUp' 'Fastball' 'Slider/Cutter']
- score: 0.479503
+ score: 0.464596
 
 
 Stephen Strasburg:
@@ -154,17 +150,14 @@ SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
 
 Carlos Carrasco:
 ----------------------------------------------------
-model: nn
-MLPClassifier(activation='relu', alpha=0.0001, batch_size='auto', beta_1=0.9,
-       beta_2=0.999, early_stopping=False, epsilon=1e-08,
-       hidden_layer_sizes=(100,), learning_rate='constant',
-       learning_rate_init=0.001, max_iter=200, momentum=0.9,
-       nesterovs_momentum=True, power_t=0.5, random_state=None,
-       shuffle=True, solver='adam', tol=0.0001, validation_fraction=0.1,
-       verbose=False, warm_start=False)
+model: svm
+SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
 
  classes: ['ChangeUp' 'Fastball']
- score: 0.716710
+ score: 0.716445
 
 
 Michael Fulmer:
@@ -203,22 +196,21 @@ MLPClassifier(activation='relu', alpha=0.0001, batch_size='auto', beta_1=0.9,
        verbose=False, warm_start=False)
 
  classes: ['Fastball' 'KnuckleBall']
- score: 0.825166
+ score: 0.826921
 
 
 Aaron Nola:
 ----------------------------------------------------
-model: nn
-MLPClassifier(activation='relu', alpha=0.0001, batch_size='auto', beta_1=0.9,
-       beta_2=0.999, early_stopping=False, epsilon=1e-08,
-       hidden_layer_sizes=(100,), learning_rate='constant',
-       learning_rate_init=0.001, max_iter=200, momentum=0.9,
-       nesterovs_momentum=True, power_t=0.5, random_state=None,
-       shuffle=True, solver='adam', tol=0.0001, validation_fraction=0.1,
-       verbose=False, warm_start=False)
+model: rf
+RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
+            max_depth=None, max_features='auto', max_leaf_nodes=None,
+            min_impurity_split=1e-07, min_samples_leaf=1,
+            min_samples_split=2, min_weight_fraction_leaf=0.0,
+            n_estimators=10, n_jobs=1, oob_score=False, random_state=None,
+            verbose=0, warm_start=False)
 
  classes: ['CurveBall' 'Fastball']
- score: 0.696846
+ score: 0.675916
 
 
 Masahiro Tanaka:
@@ -257,7 +249,7 @@ MLPClassifier(activation='relu', alpha=0.0001, batch_size='auto', beta_1=0.9,
        verbose=False, warm_start=False)
 
  classes: ['CurveBall' 'Fastball']
- score: 0.723713
+ score: 0.723696
 
 
 Julio Teheran:
@@ -286,32 +278,26 @@ SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
 
 Danny Duffy:
 ----------------------------------------------------
-model: nn
-MLPClassifier(activation='relu', alpha=0.0001, batch_size='auto', beta_1=0.9,
-       beta_2=0.999, early_stopping=False, epsilon=1e-08,
-       hidden_layer_sizes=(100,), learning_rate='constant',
-       learning_rate_init=0.001, max_iter=200, momentum=0.9,
-       nesterovs_momentum=True, power_t=0.5, random_state=None,
-       shuffle=True, solver='adam', tol=0.0001, validation_fraction=0.1,
-       verbose=False, warm_start=False)
+model: svm
+SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
 
  classes: ['CurveBall' 'Fastball']
- score: 0.720267
+ score: 0.715696
 
 
 Kyle Hendricks:
 ----------------------------------------------------
-model: nn
-MLPClassifier(activation='relu', alpha=0.0001, batch_size='auto', beta_1=0.9,
-       beta_2=0.999, early_stopping=False, epsilon=1e-08,
-       hidden_layer_sizes=(100,), learning_rate='constant',
-       learning_rate_init=0.001, max_iter=200, momentum=0.9,
-       nesterovs_momentum=True, power_t=0.5, random_state=None,
-       shuffle=True, solver='adam', tol=0.0001, validation_fraction=0.1,
-       verbose=False, warm_start=False)
+model: svm
+SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
 
  classes: ['ChangeUp' 'Fastball']
- score: 0.745746
+ score: 0.737120
 
 
 Lance McCullers:
@@ -326,7 +312,7 @@ MLPClassifier(activation='relu', alpha=0.0001, batch_size='auto', beta_1=0.9,
        verbose=False, warm_start=False)
 
  classes: ['Fastball' 'KnuckleBall']
- score: 0.685672
+ score: 0.651854
 
 
 Matt Harvey:
@@ -341,7 +327,7 @@ MLPClassifier(activation='relu', alpha=0.0001, batch_size='auto', beta_1=0.9,
        verbose=False, warm_start=False)
 
  classes: ['Fastball' 'Slider/Cutter']
- score: 0.754970
+ score: 0.735409
 
 
 Dallas Keuchel:
@@ -355,6 +341,6 @@ RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
             verbose=0, warm_start=False)
 
  classes: ['Fastball' 'Slider/Cutter']
- score: 0.642452
+ score: 0.634552
 
 

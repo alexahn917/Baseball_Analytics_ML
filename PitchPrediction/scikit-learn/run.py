@@ -19,20 +19,35 @@ from sklearn.model_selection import cross_val_score
 from sklearn.feature_extraction import DictVectorizer as DV
 
 def main():
+
+    menu = "         Pitch Prediction Model          \n"\
+           "=========================================\n"\
+           "(1) train & test pitchers                \n"\
+           "(2) predict next pitch ball              \n"\
+           "(3) exit                                 \n"\
+
+    while (True):
+        print(menu)
+        option = raw_input("Enter option: ")
+        if option == "1":
+            train_test()
+        elif option == "2":
+            load_predict()
+        elif option == "3":
+            exit(0)
+        else:
+            print("Wrong option, try again.")
+
+
+def train_test():
     with open("../pitchers_0.txt", "r") as f:
         names = f.read().split('\n')
-
+    #names = ["Clayton Kershaw"]
     model_names = ['svm', 'nn', 'rf']
-    #model_names = ['nn']
-    #model_names = ['svm']
-    #model_names = ['rf']
-    
+
     clear_txt_files(model_names)
-    # Train, Test, Write Results
     for pitcher_name in names:
-        train_data, test_data = readCSV(pitcher_name)
-        #test_data, train_data = readFullCSV(pitcher_name)
-        
+        train_data, test_data = readCSV(pitcher_name)        
         scores = []
         for model_name in model_names:
             train(train_data, pitcher_name, model_name, grid_search=False)
@@ -41,12 +56,12 @@ def main():
         pitch_types = np.unique(test_data[1])
         write_summary(scores, pitcher_name, len(pitch_types), len(train_data[1]), pitch_types)
         scores.sort(key=lambda tup:tup[1], reverse=True)
-        write_best_scores(scores, pitcher_name, test_data[1])
+        write_best_scores(scores, pitcher_name, test_data[1])    
 
-    # Making predictions
-    
-    #predict_atbat(clf)
-
+def load_predict():
+    pitcher_name = raw_input("Enter pitcher's name: ")
+    clf = load(pitcher_name)
+    predict_pitches(clf, pitcher_name)
 
 def readCSV(pitcher_name):
     train_csv_file = '../ETL pipeline/CSV/raw/' + pitcher_name + '_train' + '.csv'
@@ -72,8 +87,6 @@ def populateData(X_train, y_train):
     labels_counts.sort(key=lambda tup:tup[1], reverse=True)
     
     max_counts = labels_counts[0][1]
-    #print("Max Counts:%d" %max_counts)
-
     # sample rest of the smaller labeled datasets and append
     for i in range(1, len(labels_counts)):
         sample_size = max_counts - labels_counts[i][1]
@@ -90,24 +103,6 @@ def populateData(X_train, y_train):
     return X_train, y_train
 
 
-def readFullCSV(pitcher_name):
-    csv_file = '../ETL pipeline/CSV/full/' + pitcher_name +'.csv'
-    instances = pd.DataFrame.from_csv(csv_file, index_col=None)
-    N = len(instances)
-    targets = instances['pitch_type']
-    instances.drop('pitch_type', axis = 1, inplace=True)
-    string_cols = ['prev_pitch_type', 'prevprev_pitch_type']
-    dict_vect = DV(sparse = False)
-    instances_num = instances.drop(string_cols, axis = 1)
-    instances_str = instances[string_cols].to_dict(orient = 'records')
-    instances_str_vectorized = dict_vect.fit_transform(instances_str)
-    instances_vec = np.hstack((instances_num, instances_str_vectorized))
-    #data = [instances_vec, targets]
-    
-    X_train, X_test, y_train, y_test = train_test_split(instances_vec, targets, test_size=0.33, random_state=42)
-
-    return [X_train, y_train], [X_test, y_test]
-
 def train(data, pitcher_name, model_name, grid_search):
     X = data[0]
     y = data[1]
@@ -118,11 +113,8 @@ def train(data, pitcher_name, model_name, grid_search):
         print(np.unique(n_samples))
         print(n_samples)
         exit(1)
-#    clf = OneVsRestClassifier(LinearSVC(random_state=0))
-#    clf = OneVsOneClassifier(LinearSVC(random_state=0))
     if model_name == 'svm':
         clf = svm.SVC(decision_function_shape='ovr', gamma='auto', kernel='rbf')
-    #    clf = GridSearchCV(svm.SVC(kernel='rbf', decision_function_shape='ovr'), param_grid)
     elif model_name == 'nn':
         clf = MLPClassifier()
     elif model_name == 'rf':
@@ -131,7 +123,7 @@ def train(data, pitcher_name, model_name, grid_search):
     # grid search
     if grid_search:
         param_grid = get_param_grid(model_name)
-        grid_search = GridSearchCV(clf, param_grid=param_grid, n_jobs=-1)#, scoring='f1_macro')
+        grid_search = GridSearchCV(clf, param_grid=param_grid)#, scoring='f1_macro')
         print("\nfitting..")
         print(param_grid)
         grid_search.fit(X, y)
@@ -149,7 +141,6 @@ def load(pitcher_name):
     file_name = "../classifiers/extended/" + pitcher_name + ".pkl"
     clf = joblib.load(file_name)
     return clf
-
 
 def predict(clf, data, pitcher_name, model_name, save):
     X = data[0]
@@ -195,7 +186,7 @@ def eval(clf, act, pred):
 
 
 def scores(clf, X_train, y_train):
-    scores = cross_val_score(clf, X_train, y_train, scoring='accuracy', cv=5, n_jobs=-1)
+    scores = cross_val_score(clf, X_train, y_train, scoring='accuracy', cv=5)
     print('CV accuracy: %.3f +/- %.3f' % (np.mean(scores), np.std(scores)))
     return np.mean(scores)
 
@@ -252,54 +243,134 @@ def write_summary(scores, pitcher_name, label_size, train_size, types):
         
         f.write(table)
 
-def predict_atbat(clf):
-    X = [0] * 23
-    val = raw_input("pitch_type: ")
-    X[0] = int(val) if val else 0
-    val = raw_input("batter_num: ")
-    X[1] = int(val) if val else 0
-    val = raw_input("pitch_rl: ")
-    X[2] = int(val) if val else 0
-    val = raw_input("bat_rl: ")
-    X[3] = int(val) if val else 0
-    val = raw_input("inning: ")
-    X[4] = int(val) if val else 0
-    val = raw_input("balls: ")
-    X[5] = int(val) if val else 0
-    val = raw_input("strikes: ")
-    X[6] = int(val) if val else 0
-    val = raw_input("out: ")
-    X[7] = int(val) if val else 0
-    val = raw_input("on_1b: ")
-    X[8] = int(val) if val else 0
-    val = raw_input("on_2b: ")
-    X[9] = int(val) if val else 0
-    val = raw_input("on_3b: ")
-    X[10] = int(val) if val else 0
-    val = raw_input("score_diff: ")
-    X[11] = int(val) if val else 0
-    val = raw_input("era: ")
-    X[12] = float(val) if val else 0.0
-    val = raw_input("rbi: ")
-    X[13] = float(val) if val else 0.0
-    val = raw_input("avg: ")
-    X[14] = float(val) if val else 0.0
-    val = raw_input("hr: ")
-    X[15] = int(val) if val else 0
-    val = raw_input("pitcher_at_home: ")
-    X[16] = int(val) if val else 0
-    val = raw_input("pitcher_wins: ")
-    X[17] = int(val) if val else 0
-    val = raw_input("pitcher_losses: ")
-    X[18] = int(val) if val else 0
-    val = raw_input("batter_wins: ")
-    X[19] = int(val) if val else 0
-    val = raw_input("batter_losses: ")
-    X[20] = int(val) if val else 0
-    val = raw_input("prev_pitch_type: ")
-    X[21] = int(val) if val else -1
-    val = raw_input("prevprev_pitch_type: ")
-    X[22] = int(val) if val else -1
-    print(clf.predict(X))
+def predict_pitches(clf, pitcher_name):
+    #Clayton Kershaw
+    csv_file = '../ETL pipeline/CSV/raw/' + pitcher_name + '_test' + '.csv'
+    df = pd.DataFrame.from_csv(csv_file, index_col=None)
+    labels = np.unique(df['pitch_type'])
+    fields = df.dtypes.index
+    fields = fields.delete(0)
+
+    menu = "\n          Next Pitch Prediction          \n"\
+           "=========================================\n\n"\
+           "please enter the following...\n"\
+
+    labels_menu = "\n<Pitch Labels>\n"
+    for i in range(len(labels)):
+        labels_menu += ("(%s) %s\n" %(str(i), labels[i]))
+
+    # fill in known entries
+    x = pd.Series(index=fields)
+    x.fillna(0, inplace=True)
+    x['pitch_rl'] = df['pitch_rl'][0]
+
+    # game situations
+    inning = int(raw_input("inning: ") or 1)
+    balls = int(raw_input("balls: ") or 0)
+    strikes = int(raw_input("strikes: ") or 0)
+    out = int(raw_input("outs: ") or 0)
+    on_1b = int(raw_input("runner on 1st base (1 if yes): ") or 0)
+    on_2b = int(raw_input("runner on 2nd base (1 if yes): ") or 0)
+    on_3b = int(raw_input("runner on 3rd base (1 if yes): ") or 0)
+    score_diff = int(raw_input("score differencial (+ for pitcher): ") or 0)
+
+    # pitcher
+    pitcher_at_home = int(raw_input("pitcher at home (1 if true): ") or 0)
+    era = float(raw_input("pitcher's current ERA: ") or 0)
+    pitcher_wins = int(raw_input("# of wins for pitcher: ") or 0)
+    pitcher_losses = int(raw_input("# of losses for pitcher: ") or 0)
+
+    bat_order, bat_rl, rbi, avg, hr, batter_wins, batter_losses = get_batter_input()
+
+    x['inning'] = inning
+    x['balls'] = balls
+    x['strikes'] = strikes
+    x['out'] = out
+    x['on_1b'] = on_1b
+    x['on_2b'] = on_2b
+    x['on_3b'] = on_3b
+    x['score_diff'] = score_diff
+    x['pitcher_at_home'] = pitcher_at_home
+    x['era'] = era
+    x['pitcher_wins'] = pitcher_wins
+    x['pitcher_losses'] = pitcher_losses
+    x['bat_order'] = bat_order
+    x['bat_rl'] = bat_rl
+    x['rbi'] = rbi
+    x['avg'] = avg
+    x['hr'] = hr
+    x['batter_wins'] = batter_wins
+    x['batter_losses'] = batter_losses
+    x['prev_pitch_type0'] = 1
+    x['prevprev_pitch_type0'] = 1
+
+    results_menu = "Select the next result:\n"\
+           "(1) ball               \n"\
+           "(2) strike             \n"\
+           "(3) out                \n"\
+           "(4) strike out         \n"\
+           "(0) exit               \n"\
+
+    prev = 'prev_pitch_type0'
+    prevprev = 'prevprev_pitch_type0'
+    while True:
+        print x
+        print get_predict_menu(clf, x)
+        event = int(raw_input(results_menu) or 1)
+        pitch = labels[int(raw_input(labels_menu) or 0)]
+        x[prevprev] = 0
+        x[prev] = 0
+        prevprev = "prev" + prev
+        prev = "prev_pitch_type"+pitch
+        x[prevprev] = 1
+        x[prev] = 1
+        if event is 1:
+            x['balls'] += 1
+        elif event is 2:
+            x['strikes'] += 1
+        elif event is 3:
+            x['out'] += 1
+            bat_order, bat_rl, rbi, avg, hr, batter_wins, batter_losses = get_batter_input()
+            x['bat_rl'] = bat_rl
+            x['rbi'] = rbi
+            x['avg'] = avg
+            x['hr'] = hr
+            x['batter_wins'] = batter_wins
+            x['batter_losses'] = batter_losses
+        elif event is 4:
+            x['out'] = 0
+            x['balls'] = 0
+            x['strikes'] = 0
+            bat_order, bat_rl, rbi, avg, hr, batter_wins, batter_losses = get_batter_input()
+            x['bat_rl'] = bat_rl
+            x['rbi'] = rbi
+            x['avg'] = avg
+            x['hr'] = hr
+            x['batter_wins'] = batter_wins
+            x['batter_losses'] = batter_losses
+        elif event is 0:
+            exit(0)
+        else:
+            "Wrong input, try again"
+        #print get_predict_menu(clf, x)
+
+def get_predict_menu(clf, x):
+    menu = "*****************************************\n\n"\
+           "      Predicted next pitch: %s           \n\n"\
+           "*****************************************\n\n"\
+           %clf.predict(x)
+    return menu
+
+def get_batter_input():
+    print("Entering the batter's statistics...")
+    bat_order = int(raw_input("batting number: ") or 1)
+    bat_rl = int(raw_input("batter's hand (1 if right-handed, 0 if left-handed): ") or 0)
+    rbi = float(raw_input("batter's rbi: ") or 0)
+    avg = float(raw_input("batter's batting avg: ") or 0)
+    hr = float(raw_input("batter's homeruns: ") or 0)
+    batter_wins = int(raw_input("# of wins for batter: ") or 0)
+    batter_losses = int(raw_input("# of losses for batter: ") or 0)
+    return bat_order, bat_rl, rbi, avg, hr, batter_wins, batter_losses
+
 if __name__ == "__main__":
     main()
