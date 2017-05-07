@@ -1,13 +1,17 @@
+#!/usr/bin/env python -W ignore::DeprecationWarning
 # coding: utf-8
+from __future__ import division
 import csv
 import pickle
 import numpy as np
 import pandas as pd
 import copy
+import matplotlib.pyplot as plt
+import pdb
+from mpl_toolkits.mplot3d import Axes3D
 from sklearn import datasets, svm, metrics
 from sklearn.svm import LinearSVC
-from sklearn.multiclass import OneVsRestClassifier
-from sklearn.multiclass import OneVsOneClassifier
+from sklearn import decomposition
 from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import RandomizedSearchCV
@@ -17,6 +21,8 @@ from scipy.stats import randint as sp_randint
 from sklearn.externals import joblib
 from sklearn.model_selection import cross_val_score
 from sklearn.feature_extraction import DictVectorizer as DV
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning) 
 
 def main():
 
@@ -24,7 +30,8 @@ def main():
            "=========================================\n"\
            "(1) train & test pitchers                \n"\
            "(2) predict next pitch ball              \n"\
-           "(3) exit                                 \n"\
+           "(3) visualize the data                   \n"\
+           "(4) exit                                 \n"\
 
     while (True):
         print(menu)
@@ -34,6 +41,8 @@ def main():
         elif option == "2":
             load_predict()
         elif option == "3":
+            visualize()
+        elif option == "4":
             exit(0)
         else:
             print("Wrong option, try again.")
@@ -47,7 +56,7 @@ def train_test():
 
     clear_txt_files(model_names)
     for pitcher_name in names:
-        train_data, test_data = readCSV(pitcher_name)        
+        train_data, test_data = readCSV(pitcher_name, True)
         scores = []
         for model_name in model_names:
             train(train_data, pitcher_name, model_name, grid_search=False)
@@ -63,7 +72,68 @@ def load_predict():
     clf = load(pitcher_name)
     predict_pitches(clf, pitcher_name)
 
-def readCSV(pitcher_name):
+def visualize():
+    pitcher_name = raw_input("Enter pitcher's name: ")
+    data = readFullCSV(pitcher_name)
+    col_names = data.dtypes.index
+    y = data['pitch_type']
+    print(data.shape, y.shape)
+
+    # convert to integer labels
+    labels = np.unique(y)
+    labels_int = np.ndarray(shape=(len(y),))
+    for i in range(len(labels)):
+        labels_int[np.where(y == labels[i])] = i
+    
+    data['pitch_type'] = labels_int
+    
+    plot_PCA(data, labels_int, pitcher_name, True)
+    #plot_corr_mat(data.T, col_names)
+
+def plot_PCA(X, labels, pitcher_name, drawThirdDim):
+    X = X[:] - np.mean(X[:])
+    pca = decomposition.PCA(n_components=X.iloc[0,:].size)
+    pca.fit(X)
+    X_pca = pca.transform(X)
+    E_vectors = pca.components_.T
+    E_values = pca.explained_variance_
+    print("Explained variance with 2 eigan vectors: %f%%" %np.sum(pca.explained_variance_ratio_[:2]))
+
+    # 2D plot 
+    plt.scatter(X_pca[:,0], X_pca[:,2], s=1, c=labels, marker='o')
+    plt.xlabel("First Pricinple Component")
+    plt.ylabel("Second Pricinple Component")
+    plt.title("PCA visualization on %s\'s pitches"%pitcher_name)
+    plt.show()
+
+    # 3D plot 
+    if (drawThirdDim):
+        fig2 = plt.figure()
+        ax2 = fig2.add_subplot(111, projection='3d')
+        ax2.scatter(X_pca[:,0], X_pca[:,1], X_pca[:,2], s=1, c=labels, marker='o')
+        ax2.set_xlabel('First Pricinple Component')
+        ax2.set_ylabel('Second Pricinple Component')
+        ax2.set_zlabel('Third Pricinple Component')
+        plt.title("PCA visualization on %s\'s pitches"%pitcher_name)
+        plt.show()
+
+def plot_corr_mat(X, col_names):
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    corr_mat = np.corrcoef(X)
+    print(corr_mat.shape)
+    np.fill_diagonal(corr_mat, 0)
+    plt.imshow(corr_mat, interpolation='nearest', cmap=plt.cm.Blues)
+    plt.colorbar()
+    ax.set_yticks(np.arange(X.shape[0]))
+    ax.set_yticklabels(col_names, rotation='horizontal', fontsize=8)
+    ax.set_xticks(np.arange(X.shape[0]))
+    ax.set_xticklabels(col_names, rotation=70, fontsize=8)
+    plt.title("Correlation Matrix of Pitch Factors")
+    plt.show()    
+
+
+def readCSV(pitcher_name, populate=True):
     train_csv_file = '../ETL pipeline/CSV/raw/' + pitcher_name + '_train' + '.csv'
     test_csv_file = '../ETL pipeline/CSV/raw/' + pitcher_name + '_test' + '.csv'
 
@@ -76,8 +146,13 @@ def readCSV(pitcher_name):
     X_test.drop('pitch_type', axis = 1, inplace=True)
 
     # populate data to equalize distribution
-    X_train, y_train = populateData(X_train, y_train)
+    if populate:
+        X_train, y_train = populateData(X_train, y_train)
     return [X_train, y_train], [X_test, y_test]
+
+def readFullCSV(pitcher_name):
+    full_csv_file = '../ETL pipeline/CSV/full/' + pitcher_name + '.csv'
+    return pd.DataFrame.from_csv(full_csv_file, index_col=None)
 
 def populateData(X_train, y_train):
     labels = np.unique(y_train)
@@ -352,13 +427,14 @@ def predict_pitches(clf, pitcher_name):
             exit(0)
         else:
             "Wrong input, try again"
-        #print get_predict_menu(clf, x)
+        
+        #https://www.youtube.com/watch?v=Y9_6GFCWFCo //16:30
 
 def get_predict_menu(clf, x):
-    menu = "*****************************************\n\n"\
-           "      Predicted next pitch: %s           \n\n"\
-           "*****************************************\n\n"\
-           %clf.predict(x)
+    menu = "\n\n***********************************************\n\n"\
+           "      Predicted next pitch: %s                 \n\n"\
+           "***********************************************\n\n"\
+           %clf.predict(x)[0]
     return menu
 
 def get_batter_input():
