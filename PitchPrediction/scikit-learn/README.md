@@ -1,0 +1,27 @@
+pitcher_name| pitch_num| svm| neural_network| random_forest
+Clayton Kershaw|3|0.51|0.56|0.5
+Max Scherzer|3|0.54|0.54|0.51
+Chris Sale|3|0.54|0.5|0.46
+Madison Bumgarner|3|0.45|0.4|0.4
+Corey Kluber|3|0.6|0.61|0.58
+Justin Verlander|4|0.57|0.54|0.5
+Jon Lester|3|0.48|0.45|0.44
+Jake Arrieta|3|0.43|0.48|0.44
+Yu Darvish|2|0.62|0.64|0.61
+Johnny Cueto|3|0.48|0.49|0.49
+Stephen Strasburg|3|0.6|0.59|0.53
+Carlos Carrasco|4|0.54|0.51|0.52
+Michael Fulmer|3|0.61|0.42|0.53
+Jameson Taillon|3|0.52|0.53|0.5
+James Paxton|3|0.74|0.74|0.73
+Aaron Nola|2|0.63|0.61|0.57
+Masahiro Tanaka|2|0.73|0.72|0.7
+Zack Greinke|3|0.74|0.72|0.71
+Jose Quintana|3|0.64|0.63|0.57
+Julio Teheran|2|0.76|0.75|0.73
+Sean Manaea|3|0.48|0.49|0.52
+Danny Duffy|3|0.63|0.61|0.59
+Kyle Hendricks|3|0.69|0.69|0.68
+Lance McCullers|2|0.6|0.6|0.66
+Matt Harvey|4|0.55|0.53|0.48
+Dallas Keuchel|3|0.52|0.55|0.52

@@ -8,6 +8,7 @@ import pandas as pd
 import copy
 import matplotlib.pyplot as plt
 import pdb
+from tabulate import tabulate
 from mpl_toolkits.mplot3d import Axes3D
 from sklearn import datasets, svm, metrics
 from sklearn.svm import LinearSVC
@@ -31,7 +32,8 @@ def main():
            "(1) train & test pitchers                \n"\
            "(2) predict next pitch ball              \n"\
            "(3) visualize the data                   \n"\
-           "(4) exit                                 \n"\
+           "(4) print summary                        \n"\
+           "(5) exit                                 \n"\
 
     while (True):
         print(menu)
@@ -43,7 +45,9 @@ def main():
         elif option == "3":
             visualize()
         elif option == "4":
-            exit(0)
+            print_summary()
+        elif option == "5":
+            exit(0)            
         else:
             print("Wrong option, try again.")
 
@@ -64,8 +68,8 @@ def train_test():
             scores.append((model_name, predict(clf, test_data, pitcher_name, model_name, save=True), clf))
         pitch_types = np.unique(test_data[1])
         write_summary(scores, pitcher_name, len(pitch_types), len(train_data[1]), pitch_types)
-        scores.sort(key=lambda tup:tup[1], reverse=True)
-        write_best_scores(scores, pitcher_name, test_data[1])    
+        #scores.sort(key=lambda tup:tup[1], reverse=True)
+        #write_best_scores(scores, pitcher_name, test_data[1])
 
 def load_predict():
     pitcher_name = raw_input("Enter pitcher's name: ")
@@ -153,6 +157,15 @@ def readCSV(pitcher_name, populate=True):
 def readFullCSV(pitcher_name):
     full_csv_file = '../ETL pipeline/CSV/full/' + pitcher_name + '.csv'
     return pd.DataFrame.from_csv(full_csv_file, index_col=None)
+
+def print_summary():
+    summary = "../classifiers/results/summary.csv"
+    with open(summary, "r") as f:
+        df = pd.DataFrame.from_csv(summary, index_col=None)
+    print(df.dtypes.index)
+    sorted_df = df.sort(['svm', 'neural_network', 'random_forest'], ascending=False)
+    print(tabulate(sorted_df, headers='keys', tablefmt='pipe'))
+    #df.to_csv("summary.md", sep="|", index=False)
 
 def populateData(X_train, y_train):
     labels = np.unique(y_train)
@@ -278,6 +291,9 @@ def clear_txt_files(model_names):
     file_name = "../classifiers/results/summary.txt" 
     with open(file_name, "w") as f:
         f.write("Prediction Accuracy Summary:\n\n")
+    file_name = "../classifiers/results/summary.csv" 
+    with open(file_name, "w") as f:
+        f.write("pitcher_name,num_pitch_types,svm,neural_network,random_forest\n")
 
 
 def write_results(act, pred, pitcher_name, model_name):
@@ -315,8 +331,14 @@ def write_summary(scores, pitcher_name, label_size, train_size, types):
                 "====================================================\n\n"\
                 .format(pitcher_name, float(scores[0][1]), float(scores[1][1]), float(scores[2][1]),\
                 label_size, train_size, types)
-        
         f.write(table)
+    print(scores)
+    with open("../classifiers/results/summary.csv", "a") as f:
+        table = "{0},{1},{2:.2f},{3:.2f},{4:.2f}\n"\
+                .format(pitcher_name, label_size, \
+                 float(scores[0][1]), float(scores[1][1]), float(scores[2][1]))
+        f.write(table)
+
 
 def predict_pitches(clf, pitcher_name):
     #Clayton Kershaw
@@ -350,7 +372,7 @@ def predict_pitches(clf, pitcher_name):
     score_diff = int(raw_input("score differencial (+ for pitcher): ") or 0)
 
     # pitcher
-    pitcher_at_home = int(raw_input("pitcher at home (1 if true): ") or 0)
+    pitcher_at_home = int(raw_input("pitcher at home (1 if true): ") or -1)
     era = float(raw_input("pitcher's current ERA: ") or 0)
     pitcher_wins = int(raw_input("# of wins for pitcher: ") or 0)
     pitcher_losses = int(raw_input("# of losses for pitcher: ") or 0)
